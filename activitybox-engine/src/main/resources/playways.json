@@ -1,0 +1,5 @@
+{ "playways": [{ "code": "package com.uxiangtech.activitybox.engine;\n\nimport com.uxiangtech.activitybox.sdk.context.UserRequestContext;\nimport com.uxiangtech.activitybox.sdk.playways.invitation.AbstractInvitationStdPlayway;\nimport com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;\nimport com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayConf;\n\npublic class HelloWorldStdPlayway extends AbstractInvitationStdPlayway {\n  @Override\n  public String getId() {\n    return \"world\";\n  }\n\n  @Override\n  public String getName() {\n    return \"测试玩法\";\n  }\n\n  @Override\n  public void initConf(InvitationStdPlaywayConf conf) {\n\n  }\n\n  @Override\n  public String makeCode(UserRequestContext ctx, InvitationStdPlaywayApi api) {\n    return \"abc\";\n  }\n\n  @Override\n  public void acceptInvitation(UserRequestContext ctx, InvitationStdPlaywayApi api, String code) {\n    System.out.println(code);\n  }\n}\n", "lang": "JAVA"} ]}
+
+
+
+

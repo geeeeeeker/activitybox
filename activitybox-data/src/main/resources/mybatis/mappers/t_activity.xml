@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uxiangtech.activitybox.data.activity.ActivityDAO">
+
+  <sql id="fields">
+    `id`,
+--     `tenant_id`,
+		`name`,
+    `rule_desc`,
+		`start_time`,
+		`end_time`,
+		`status`,
+    `attribute`,
+		`gmt_create`,
+		`gmt_modified`
+  </sql>
+
+  <select id="getActivityById" parameterType="Long" resultType="com.uxiangtech.activitybox.data.activity.ActivityPO">
+    select
+    <include refid="fields"/>
+    from `t_activity`
+    where id = #{id}
+  </select>
+
+
+</mapper>

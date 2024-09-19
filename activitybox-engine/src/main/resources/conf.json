@@ -1,0 +1,45 @@
+{
+  "playways": [
+    {
+      "id": "",
+      "name": "",
+      "type": "",
+      "code": "",
+      "lang": ""
+    }
+  ],
+  "pages": [
+    {
+      "id": "",
+      "name": "",
+      "code": ""
+    }
+  ],
+  "awards": [
+    {
+      "id": "",
+      "name": "",
+      "type": "",
+      "icon": "",
+      "link": "",
+      "stock": 0
+    }
+  ],
+  "pools": [
+    {
+      "id": "",
+      "name": "",
+      "type": "RANDOM",
+      "options": [
+        {
+          "id": "",
+          "name": "谢谢参与",
+          "icon": "",
+          "probability": 1.00
+        }
+      ]
+    }
+  ]
+}
+
+
