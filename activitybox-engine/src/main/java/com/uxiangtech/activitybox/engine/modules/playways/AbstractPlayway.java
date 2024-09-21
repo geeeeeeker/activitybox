@@ -2,9 +2,7 @@ package com.uxiangtech.activitybox.engine.modules.playways;
 
 import com.uxiangtech.activitybox.engine.modules.actions.Action;
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
-import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import com.uxiangtech.activitybox.sdk.attribute.PlaywayAttribute;
-import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
 
 import java.util.function.Supplier;
 
@@ -86,7 +84,7 @@ public abstract class AbstractPlayway<P extends Playway<?>> implements Playway<P
   }
 
   @Override
-  public Language getLanguage() {
+  public Language getLang() {
     return Playway.Language.valueOf(this.playwayAttribute.getLang());
   }
 }

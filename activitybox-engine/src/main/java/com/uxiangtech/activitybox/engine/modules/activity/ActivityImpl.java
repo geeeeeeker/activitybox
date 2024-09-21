@@ -7,8 +7,10 @@ import com.uxiangtech.activitybox.engine.modules.award.pool.AwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
 import com.uxiangtech.activitybox.engine.modules.playways.Playway;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
@@ -24,7 +26,9 @@ public class ActivityImpl implements Activity {
   private LocalDateTime gmtCreate;
   private LocalDateTime gmtModified;
 
-  public ActivityImpl(final ActivityPO activityPO) {
+  private final PlatformTransactionManager txManager;
+
+  public ActivityImpl(final ActivityPO activityPO, final PlatformTransactionManager txManager) {
     this.id = activityPO.getId();
     this.name = activityPO.getName();
     this.ruleDesc = activityPO.getRuleDesc();
@@ -35,11 +39,12 @@ public class ActivityImpl implements Activity {
     this.attribute = JSON.parseObject(activityPO.getAttribute(), ActivityAttribute.class);
     this.gmtCreate = activityPO.getGmtCreate();
     this.gmtModified = activityPO.getGmtModified();
+    this.txManager = txManager;
   }
 
   // 以下信息间接从活动属性中解析得到
 
-  private Map<Long, Page> pageMap;              // 页面集合
+  private Map<String, Page> pageMap;            // 页面集合
   private Map<String, Playway<?>> playwayMap;   // 玩法集合
   private Map<String, Award> awardMap;          // 奖品集合
   private Map<String, AwardPool> awardPoolMap;  // 奖池集合
@@ -65,18 +70,21 @@ public class ActivityImpl implements Activity {
   }
 
   @Override
-  public void setPageMap(Map<Long, Page> pageMap) {
+  public void setPageMap(Map<String, Page> pageMap) {
     this.pageMap = pageMap;
   }
 
   @Override
-  public Map<Long, Page> getPageMap() {
+  public Map<String, Page> getPageMap() {
+    if (null == this.pageMap) {
+      this.pageMap = new HashMap<>();
+    }
     return this.pageMap;
   }
 
   @Override
   public Page getPageOrDegradeToNullPage(final String pageId) {
-    return this.pageMap.getOrDefault(pageId, Page.NULL);
+    return this.pageMap.getOrDefault(pageId, Page.INVALID);
   }
 
   @Override
@@ -86,6 +94,9 @@ public class ActivityImpl implements Activity {
 
   @Override
   public Map<String, Playway<?>> getPlaywayMap() {
+    if (null == this.playwayMap) {
+      this.playwayMap = new HashMap<>();
+    }
     return this.playwayMap;
   }
 
@@ -111,6 +122,9 @@ public class ActivityImpl implements Activity {
 
   @Override
   public Map<String, Award> getAwardMap() {
+    if (null == this.awardMap) {
+      this.awardMap = new HashMap<>();
+    }
     return this.awardMap;
   }
 
@@ -121,6 +135,9 @@ public class ActivityImpl implements Activity {
 
   @Override
   public Map<String, AwardPool> getAwardPoolMap() {
+    if (null == this.awardPoolMap) {
+      this.awardPoolMap = new HashMap<>();
+    }
     return this.awardPoolMap;
   }
 
@@ -148,5 +165,10 @@ public class ActivityImpl implements Activity {
   @Override
   public LocalDateTime getGmtModified() {
     return this.gmtModified;
+  }
+
+  @Override
+  public PlatformTransactionManager getTxManager() {
+    return this.txManager;
   }
 }

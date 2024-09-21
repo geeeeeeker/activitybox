@@ -3,12 +3,14 @@ package com.uxiangtech.activitybox.engine.modules.playways;
 import com.uxiangtech.activitybox.engine.modules.actions.Action;
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.Map;
 import java.util.function.Supplier;
 
 /**
- * 玩法接口
+ * 玩法定义
+ *
  */
 public interface Playway<P extends Playway<?>> {
 
@@ -35,6 +37,14 @@ public interface Playway<P extends Playway<?>> {
    * @return
    */
   Object getStdPlaywayInstance();
+
+  Class<? extends StdPlayway> getStdPlaywayClass();
+
+  void setStdPlaywayClass(Class<? extends StdPlayway> stdPlaywayClass);
+
+  void setInitConfMethodName(String initConfMethodName);
+
+  String getInitConfMethodName();
 
   /**
    * 获取玩法中的方法集合
@@ -73,7 +83,7 @@ public interface Playway<P extends Playway<?>> {
    * 获取标准玩法代码的编程语言
    * @return
    */
-  Language getLanguage();
+  Language getLang();
 
 
   /**

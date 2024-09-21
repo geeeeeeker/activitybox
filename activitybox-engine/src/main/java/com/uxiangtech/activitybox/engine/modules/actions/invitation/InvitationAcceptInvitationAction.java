@@ -2,9 +2,12 @@ package com.uxiangtech.activitybox.engine.modules.actions.invitation;
 
 import com.uxiangtech.activitybox.engine.modules.actions.AbstractAction;
 import com.uxiangtech.activitybox.engine.modules.playways.Playway;
-import com.uxiangtech.activitybox.sdk.context.UserRequestContext;
+import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
 import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlayway;
 import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;
+import org.apache.commons.lang3.StringUtils;
+
+import java.lang.reflect.Method;
 
 public class InvitationAcceptInvitationAction extends AbstractAction {
 
@@ -16,14 +19,27 @@ public class InvitationAcceptInvitationAction extends AbstractAction {
   }
 
   @Override
-  protected Object doExecute(UserRequestContext context) {
+  protected Object doExecute(ActionCallContext context) {
 
     // 邀请码
     final String code = context.getRequestParam("code");
+    if (StringUtils.isBlank(code)) {
+      throw new RuntimeException("邀请码不存在");
+    }
+
+    // 校验邀请码
+    invitationStdPlaywayApi.getInviterByCode(code);
 
     final InvitationStdPlayway invitationStdPlayway = (InvitationStdPlayway) this.getPlayway().getStdPlaywayInstance();
     invitationStdPlayway.acceptInvitation(context, this.invitationStdPlaywayApi, code);
 
     return null;
+  }
+
+  @Override
+  public Method getExecutableMethod() throws NoSuchMethodException {
+    Object stdPlaywayInstance = this.getPlayway().getStdPlaywayInstance();
+    return stdPlaywayInstance.getClass().getDeclaredMethod(
+      "acceptInvitation", ActionCallContext.class, InvitationStdPlaywayApi.class, String.class);
   }
 }

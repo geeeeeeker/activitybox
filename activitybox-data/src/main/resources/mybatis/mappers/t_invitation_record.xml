@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uxiangtech.activitybox.data.invitation.InvitationRecordDAO">
+
+  <sql id="fields">
+    `id`,
+    `activity_id`,
+    `inviter_id`,
+    `invitee_id`,
+    `is_deleted`,
+    `gmt_create`,
+    `gmt_modified`
+  </sql>
+
+  <select id="findByInviteeIdAndActivityId" resultType="java.util.List">
+    SELECT <include refid="fields"/>
+    FROM `t_invitation_record`
+    WHERE `invitee_id` = #{inviteeId} AND `activity_id` = #{activityId}
+  </select>
+
+  <select id="findByInviterIdAndActivityId" resultType="java.util.List">
+    SELECT <include refid="fields"/>
+    FROM `t_invitation_record`
+    WHERE `inviter_id` = #{inviterId} AND `activity_id` = #{activityId}
+  </select>
+
+</mapper>

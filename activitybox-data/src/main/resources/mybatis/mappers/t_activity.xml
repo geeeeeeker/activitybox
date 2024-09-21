@@ -4,7 +4,8 @@
 <mapper namespace="com.uxiangtech.activitybox.data.activity.ActivityDAO">
 
   <sql id="fields">
-    `id`,
+    `id`
+    ,
 --     `tenant_id`,
 		`name`,
     `rule_desc`,
@@ -12,15 +13,31 @@
 		`end_time`,
 		`status`,
     `attribute`,
+    `is_deleted`,
 		`gmt_create`,
 		`gmt_modified`
   </sql>
 
-  <select id="getActivityById" parameterType="Long" resultType="com.uxiangtech.activitybox.data.activity.ActivityPO">
+  <select id="findActivityById" parameterType="Long" resultType="com.uxiangtech.activitybox.data.activity.ActivityPO">
     select
     <include refid="fields"/>
     from `t_activity`
-    where id = #{id}
+    where `id` = #{id} AND `is_deleted` = false
+  </select>
+
+  <select id="findAllOnlineActivities" resultType="java.util.List">
+    select
+    <include refid="fields"/>
+    from `t_activity`
+    where `id` = #{id} AND `status` = 'ONLINE' AND `is_deleted` = false
+  </select>
+
+
+  <select id="findAllModifiedActivities" resultType="java.util.List">
+    select
+    <include refid="fields"/>
+    from `t_activity`
+    where `gmt_modified` > #{lastLoadTime} AND `is_deleted` = false
   </select>
 
 

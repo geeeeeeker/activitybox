@@ -43,13 +43,10 @@ public interface Award {
    */
   Long getStock();
 
-
-  /**
-   * 执行发奖逻辑
-   * @return
-   */
-  Object execute();
+  enum Type {
+    PROP,  // 游戏道具
 
 
+  }
 
 }

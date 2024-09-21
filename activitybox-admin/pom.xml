@@ -24,6 +24,11 @@
       <artifactId>activitybox-sdk</artifactId>
       <version>1.0.0</version>
     </dependency>
+    <dependency>
+      <groupId>com.uxiangtech.activitybox</groupId>
+      <artifactId>activitybox-data</artifactId>
+      <version>1.0.0</version>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework.boot</groupId>

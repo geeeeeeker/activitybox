@@ -8,14 +8,34 @@ public abstract class AbstractPropAward implements Award {
 
   private final String name;
 
-  private final String iconUrl;
+  private final String icon;
 
-  private Activity activity;
+  private final Activity activity;
 
-  public AbstractPropAward(String id, String name, String iconUrl, Activity activity) {
+  public AbstractPropAward(String id, String name, String icon, Activity activity) {
     this.id = id;
     this.name = name;
-    this.iconUrl = iconUrl;
+    this.icon = icon;
     this.activity = activity;
+  }
+
+  @Override
+  public String getId() {
+    return id;
+  }
+
+  @Override
+  public String getName() {
+    return name;
+  }
+
+  @Override
+  public String getIcon() {
+    return icon;
+  }
+
+  @Override
+  public Activity getActivity() {
+    return activity;
   }
 }

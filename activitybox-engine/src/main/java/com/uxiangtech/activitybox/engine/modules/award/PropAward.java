@@ -1,28 +1,21 @@
 package com.uxiangtech.activitybox.engine.modules.award;
 
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+import com.uxiangtech.activitybox.sdk.attribute.AwardAttribute;
 
 /**
  * 道具奖品
  *
  * 道具奖品是虚拟奖品，用于游戏道具等计数场景，没有奖品库存限制。
  */
-public class PropAward implements Award {
+public class PropAward extends AbstractPropAward {
 
-
-  @Override
-  public String getId() {
-    return "prop";
+  public PropAward(String id, String name, String icon, Activity activity) {
+    super(id, name, icon, activity);
   }
 
-  @Override
-  public String getName() {
-    return "道具奖品";
-  }
-
-  @Override
-  public String getIcon() {
-    return null;
+  public PropAward(AwardAttribute attribute, Activity activity) {
+    this(attribute.getId(), attribute.getName(), attribute.getIcon(), activity);
   }
 
   @Override
@@ -31,17 +24,7 @@ public class PropAward implements Award {
   }
 
   @Override
-  public Activity getActivity() {
-    return null;
-  }
-
-  @Override
   public Long getStock() {
-    return null;
-  }
-
-  @Override
-  public Object execute() {
     return null;
   }
 }

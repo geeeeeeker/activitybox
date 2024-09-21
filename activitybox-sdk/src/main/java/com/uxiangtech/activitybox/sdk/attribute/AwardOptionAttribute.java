@@ -1,5 +1,6 @@
 package com.uxiangtech.activitybox.sdk.attribute;
 
+import com.alibaba.fastjson2.annotation.JSONField;
 import lombok.Data;
 
 import java.math.BigDecimal;
@@ -7,9 +8,18 @@ import java.math.BigDecimal;
 @Data
 public class AwardOptionAttribute {
   private String id;
+
+  /**
+   * 奖品ID
+   */
+  @JSONField(name = "award_id")
+  private String awardId;
+  /**
+   * 奖项名称
+   */
   private String name;
   /**
-   * 概率
+   * 出奖概率
    */
   private BigDecimal probability;
   /**

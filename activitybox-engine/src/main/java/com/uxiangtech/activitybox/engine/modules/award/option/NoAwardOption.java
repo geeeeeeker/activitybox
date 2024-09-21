@@ -31,7 +31,7 @@ public class NoAwardOption implements AwardOption {
   }
 
   @Override
-  public AwardPool getAwardRule() {
+  public AwardPool getAwardPool() {
     return null;
   }
 

@@ -39,10 +39,10 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
-public class PlaywayJavaInstanceFactory implements PlaywayInstanceFactory {
+public class JavaBasedPlaywayFactory implements PlaywayFactory {
 
   private static final Logger LOGGER =
-    LoggerFactory.getLogger(PlaywayJavaInstanceFactory.class);
+    LoggerFactory.getLogger(JavaBasedPlaywayFactory.class);
 
   private final CodeParser parser;
 
@@ -50,7 +50,7 @@ public class PlaywayJavaInstanceFactory implements PlaywayInstanceFactory {
 
   private final PlaywayClassLoader playwayClassLoader;
 
-  public PlaywayJavaInstanceFactory(final ClassLoader parent) {
+  public JavaBasedPlaywayFactory(final ClassLoader parent) {
     this.parser = new JavaCodeParser();
     final JavacCodeCompilerFactory javacCodeCompilerFactory = new JavacCodeCompilerFactory();
     this.compiler = javacCodeCompilerFactory.getCompiler();
@@ -165,7 +165,7 @@ public class PlaywayJavaInstanceFactory implements PlaywayInstanceFactory {
   /**
    * 代码元数据解析器
    */
-  private class JavaCodeParser implements CodeParser {
+  private final class JavaCodeParser implements CodeParser {
 
     private final JavaParser javaParser = new JavaParser();
 
@@ -274,7 +274,7 @@ public class PlaywayJavaInstanceFactory implements PlaywayInstanceFactory {
 
       // 编译成功后，获取字节码文件字节数组
       Map<String, byte[]> classfileBytesCache = classfileBytesJavaFileManager.getClassfileBytesCache();
-      PlaywayJavaInstanceFactory.this.playwayClassLoader.setClassfileBytesCache(classfileBytesCache);
+      JavaBasedPlaywayFactory.this.playwayClassLoader.setClassfileBytesCache(classfileBytesCache);
     }
   }
 

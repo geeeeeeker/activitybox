@@ -6,6 +6,7 @@ import com.uxiangtech.activitybox.engine.modules.actions.invitation.InvitationMa
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.playways.AbstractPlayway;
 import com.uxiangtech.activitybox.engine.support.SpringBeanHolder;
+import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
 import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlayway;
 import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;
 
@@ -23,12 +24,15 @@ public final class InvitationPlaywayImpl extends AbstractPlayway<InvitationPlayw
 
   private final InvitationStdPlayway invitationStdPlayway;
 
+  private Class<?> stdPlaywayClass;
+
 
   public InvitationPlaywayImpl(final String playwayId, final String playwayName, InvitationStdPlayway invitationStdPlayway, Activity activity, ClassLoader classLoader) {
     super(playwayId, playwayName, activity, classLoader);
 
     // 初始化配置信息
     this.invitationStdPlayway = invitationStdPlayway;
+    this.stdPlaywayClass = invitationStdPlayway.getClass();
     this.invitationService = SpringBeanHolder.getBean(InvitationService.class);
     this.invitationStdPlaywayApi = SpringBeanHolder.getBean(InvitationStdPlaywayApi.class);
   }
@@ -36,6 +40,26 @@ public final class InvitationPlaywayImpl extends AbstractPlayway<InvitationPlayw
   @Override
   public Object getStdPlaywayInstance() {
     return this.invitationStdPlayway;
+  }
+
+  @Override
+  public Class<? extends StdPlayway> getStdPlaywayClass() {
+    return this.invitationStdPlayway.getClass();
+  }
+
+  @Override
+  public void setStdPlaywayClass(Class<? extends StdPlayway> stdPlaywayClass) {
+    this.stdPlaywayClass = stdPlaywayClass;
+  }
+
+  @Override
+  public void setInitConfMethodName(String initConfMethodName) {
+
+  }
+
+  @Override
+  public String getInitConfMethodName() {
+    return null;
   }
 
   @Override
@@ -48,6 +72,7 @@ public final class InvitationPlaywayImpl extends AbstractPlayway<InvitationPlayw
     final Action acceptInvitationAction =
       new InvitationAcceptInvitationAction(
         "accept", "接受邀请", this, this.invitationStdPlaywayApi);
+
 
     final Map<String, Action> actionMap = new HashMap<>();
     actionMap.put(makeCodeAction.getId(), makeCodeAction);

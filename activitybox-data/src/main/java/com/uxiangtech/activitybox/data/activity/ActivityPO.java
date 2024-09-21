@@ -13,7 +13,7 @@ public class ActivityPO {
   /**
    * 活动ID
    */
-  @TableId()
+  @TableId
   private Long id;
 
 //  /**

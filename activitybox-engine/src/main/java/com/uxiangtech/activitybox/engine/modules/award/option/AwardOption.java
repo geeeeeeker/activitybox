@@ -39,7 +39,7 @@ public interface AwardOption {
    * 获取奖项归属抽奖规则
    * @return
    */
-  AwardPool getAwardRule();
+  AwardPool getAwardPool();
 
   /**
    * 获取奖项归属的奖品
@@ -47,16 +47,5 @@ public interface AwardOption {
    */
   Award getAward();
 
-
-  /**
-   * 前端页面配置信息
-   */
-  @Data
-  class Attribute {
-    private String id;
-    private String name;
-    private BigDecimal probability;
-    private Long stock;
-  }
 
 }

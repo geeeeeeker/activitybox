@@ -1,35 +1,19 @@
 package com.uxiangtech.activitybox.engine.modules.award.pool;
 
-import com.uxiangtech.activitybox.engine.modules.award.Award;
-
-import java.util.Map;
+import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+import com.uxiangtech.activitybox.sdk.attribute.AwardPoolAttribute;
 
 /**
- * 直接发奖规则奖池
+ * 直接抽奖规则奖池
  */
-public class DirectAwardPool implements AwardPool {
-  @Override
-  public String getId() {
-    return null;
+public class DirectAwardPool extends AbstractAwardPool {
+
+  public DirectAwardPool(AwardPoolAttribute attribute, Activity activity) {
+    super(attribute, activity);
   }
 
   @Override
-  public String getName() {
-    return null;
-  }
-
-  @Override
-  public String getDesc() {
-    return null;
-  }
-
-  @Override
-  public RuleType getType() {
-    return null;
-  }
-
-  @Override
-  public Map<String, Award> getAwardMap() {
+  public AwardDrawingResult draw(AwardDrawingContext context) {
     return null;
   }
 }

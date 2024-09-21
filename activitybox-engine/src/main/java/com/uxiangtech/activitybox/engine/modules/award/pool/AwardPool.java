@@ -1,6 +1,8 @@
 package com.uxiangtech.activitybox.engine.modules.award.pool;
 
+import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.award.Award;
+import com.uxiangtech.activitybox.engine.modules.award.option.AwardOption;
 
 import java.util.Map;
 
@@ -22,22 +24,23 @@ public interface AwardPool {
   String getName();
 
   /**
-   * 获取抽奖规则描述
+   * 获取活动
    * @return
    */
-  String getDesc();
+  Activity getActivity();
 
   /**
-   * 获取抽奖规则类型
+   * 获取奖项列表
    * @return
    */
-  RuleType getType();
+  Map<String, AwardOption> getAwardOptionMap();
 
   /**
-   * 获取规则奖项
+   * 抽取奖项
+   * @param context
    * @return
    */
-  Map<String, Award> getAwardMap();
+  AwardDrawingResult draw(AwardDrawingContext context);
 
   /**
    * 抽奖规则类型

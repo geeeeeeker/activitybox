@@ -55,6 +55,8 @@ public class SampleInvitationStdPlayway extends AbstractInvitationStdPlayway {
 
 ```
 
+支持基于注解@BoxPlayway/@BoxAction约定的玩法
+
 ```java
 
 @ActPlayway(id = "sample_invitation", name = "样例邀请玩法")
@@ -78,11 +80,15 @@ public class SampleInvitationStdPlayway {
 
 ```
 
+笔者经过大量实践，发现虽然定义了标准玩法，但是仍然无法覆盖多变的业务场景，部分业务需要支持特殊的接口，例如有些活动需要首次访问时增加道具数量等，但该方式不是标准玩法能定义的。
+
+
+lastLoadTime 上次加载时间
+
+首次加载时全量；后续30s增量加载，每次加载时仅加载更新时间大于lastLoadTime的活动
 
 
 
 
-
-
-
+支持并发抽奖：比如十连抽（游戏场景通常会遇到十连抽）
 

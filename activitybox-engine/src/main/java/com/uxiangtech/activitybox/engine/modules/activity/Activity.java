@@ -5,13 +5,14 @@ import com.uxiangtech.activitybox.engine.modules.award.pool.AwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
 import com.uxiangtech.activitybox.engine.modules.playways.Playway;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.function.Supplier;
 
 /**
- * 活动接口，每一个活动就是一个交付给客户的项目，封装了项目相关的配置信息及活动代码加载的方式
+ * 活动定义接口，每一个活动就是一个交付给客户的项目，封装了项目相关的配置信息及活动代码加载的方式
  */
 public interface Activity {
 
@@ -39,13 +40,13 @@ public interface Activity {
    */
   ActivityAttribute getAttribute();
 
-  void setPageMap(Map<Long, Page> pageMap);
+  void setPageMap(Map<String, Page> pageMap);
 
   /**
    * 获取活动包含的页面集合
    * @return
    */
-  Map<Long, Page> getPageMap();
+  Map<String, Page> getPageMap();
 
   /**
    * 获取指定ID的页面，如果不存在则降级至空错误页
@@ -85,7 +86,6 @@ public interface Activity {
    */
   Map<String, Award> getAwardMap();
 
-
   void setAwardPoolMap(Map<String, AwardPool> awardPoolMap);
 
   /**
@@ -118,17 +118,23 @@ public interface Activity {
    */
   LocalDateTime getGmtCreate();
 
-//  /**
+  /**
+   * 更新时间
+   * @return
+   */
+  LocalDateTime getGmtModified();
+
+  //  /**
 //   * 获取活动类加载器
 //   * @return
 //   */
 //  ClassLoader getClassLoader();
 
   /**
-   * 更新时间
+   * 获取事务管理器
    * @return
    */
-  LocalDateTime getGmtModified();
+  PlatformTransactionManager getTxManager();
 
   enum Status {
     DRAFT, ONLINE, OFFLINE
