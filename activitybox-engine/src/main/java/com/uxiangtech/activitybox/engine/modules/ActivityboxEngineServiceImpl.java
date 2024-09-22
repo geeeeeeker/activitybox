@@ -5,6 +5,8 @@ import com.uxiangtech.activitybox.engine.modules.activity.registry.ActivityRegis
 import com.uxiangtech.activitybox.sdk.action.Action;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContextHolder;
+import com.uxiangtech.activitybox.sdk.context.UserContext;
+import com.uxiangtech.activitybox.sdk.context.UserContextHolder;
 import com.uxiangtech.activitybox.sdk.page.Page;
 import com.uxiangtech.activitybox.sdk.playway.Playway;
 import com.uxiangtech.activitybox.sdk.action.ActionNotFoundException;
@@ -23,8 +25,8 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
    * @param activityId 活动ID
    * @param playwayId  玩法ID
    * @param actionId   动作ID
-   * @param request
-   * @return
+   * @param request    Servlet请求对象
+   * @return 动作调用结果
    */
   @Override
   public Object callAction(Long activityId, String playwayId, String actionId, HttpServletRequest request) {
@@ -42,7 +44,8 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
 
     //构建动作调用上下文
     final ActionCallContext context =
-      new ActionCallContextImpl(activity, playway, action, request);
+      new ActionCallContextImpl(activity, playway,
+        action, UserContextHolder.getInstance().getContext(), request);
     final ActionCallContextHolder holder = ActionCallContextHolder.getInstance();
 
     holder.setContext(context);
@@ -59,7 +62,7 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
    *
    * @param activityId 活动ID
    * @param pageId     页面ID
-   * @return
+   * @return 页面代码
    */
   @Override
   public String getPage(Long activityId, String pageId) {

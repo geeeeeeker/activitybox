@@ -2,6 +2,7 @@ package com.uxiangtech.activitybox.engine.modules.sdkimpl.context;
 
 import com.uxiangtech.activitybox.sdk.action.Action;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
+import com.uxiangtech.activitybox.sdk.context.UserContext;
 import com.uxiangtech.activitybox.sdk.playway.Playway;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
 
@@ -14,23 +15,22 @@ import java.util.Map;
  */
 public class ActionCallContextImpl implements ActionCallContext {
 
-  private Map<String, Object> properties = new HashMap<>();
+  private final Map<String, Object> m = new HashMap<>();
 
-  private String tenantId;
   private final Activity activity;
   private final Playway playway;
   private final Action action;
 
-  private Long userId;
-  private String outUserId;
+  private final UserContext userContext;
 
   private final HttpServletRequest request;
 
 
-  public ActionCallContextImpl(Activity activity, Playway<?> playway, Action action, HttpServletRequest request) {
+  public ActionCallContextImpl(Activity activity, Playway<?> playway, Action action, UserContext userContext, HttpServletRequest request) {
     this.activity = activity;
     this.playway = playway;
     this.action = action;
+    this.userContext = userContext;
     this.request = request;
   }
 
@@ -46,12 +46,17 @@ public class ActionCallContextImpl implements ActionCallContext {
 
   @Override
   public Long getUserId() {
-    return this.userId;
+    return this.userContext.getUserId();
   }
 
   @Override
   public String getOutUserId() {
-    return this.outUserId;
+    return this.userContext.getOutUserId();
+  }
+
+  @Override
+  public String getOutUsername() {
+    return this.userContext.getOutUsername();
   }
 
   @Override
@@ -75,8 +80,8 @@ public class ActionCallContextImpl implements ActionCallContext {
   }
 
   @Override
-  public String getTenantId() {
-    return this.tenantId;
+  public Long getTenantId() {
+    return this.userContext.getTenantId();
   }
 
   @Override
@@ -86,17 +91,17 @@ public class ActionCallContextImpl implements ActionCallContext {
 
   @Override
   public Activity getActivity() {
-    return null;
+    return this.activity;
   }
 
   @Override
   public ActionCallContext addData(String key, Object value) {
-    this.properties.put(key, value);
+    this.m.put(key, value);
     return this;
   }
 
   @Override
   public Object getData(String key) {
-    return this.properties.get(key);
+    return this.m.get(key);
   }
 }

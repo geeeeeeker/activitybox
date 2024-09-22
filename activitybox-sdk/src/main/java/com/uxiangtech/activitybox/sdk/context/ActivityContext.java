@@ -9,7 +9,7 @@ public interface ActivityContext<C extends ActivityContext<?>> extends Context<C
    *
    * @return 租户ID
    */
-  String getTenantId();
+  Long getTenantId();
 
   /**
    * 获取活动ID
