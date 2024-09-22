@@ -5,7 +5,7 @@ import com.uxiangtech.activitybox.sdk.award.AwardDrawingResult;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AwardDrawingApiImpl extends ApiImpl implements AwardDrawingApi {
+public class AwardDrawingApiImpl implements AwardDrawingApi {
 
   @Override
   public AwardDrawingResult directDrawAwardPool() {

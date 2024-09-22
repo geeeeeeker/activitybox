@@ -1,11 +1,13 @@
 package com.uxiangtech.activitybox.sdk.playway.invitation;
 
+import com.uxiangtech.activitybox.sdk.api.Api;
+
 import java.util.List;
 
 /**
  * 邀请标准玩法工具集
  */
-public interface InvitationStdPlaywayApi {
+public interface InvitationStdPlaywayApi extends Api {
 
   /**
    * 查询我的邀请码，如果没有则自动生成

@@ -19,7 +19,7 @@ public interface Api extends ActionCallContextCapable {
    * 游戏道具奖励API
    * @return
    */
-  PropApi awardPropApi();
+  PropApi propApi();
 
 
 

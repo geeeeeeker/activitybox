@@ -1,5 +1,6 @@
 package com.uxiangtech.activitybox.engine.modules.prop;
 
+import com.uxiangtech.activitybox.data.prop.PropIdQuantity;
 import com.uxiangtech.activitybox.data.prop.PropRecordDAO;
 import com.uxiangtech.activitybox.data.prop.PropRecordPO;
 import com.uxiangtech.activitybox.data.prop.PropUserDAO;
@@ -8,6 +9,7 @@ import org.springframework.transaction.support.TransactionTemplate;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class PropServiceImpl implements PropService {
@@ -37,8 +39,10 @@ public class PropServiceImpl implements PropService {
   public boolean grantProps(Long activityId, String playwayId, String actionId, Long userId, String propId, Long quantity) {
 
     if (quantity <= 0) {
-
+      return false;
     }
+
+    this.propUserDAO.insertOrAddQuantity(activityId, userId, propId, quantity);
 
     final PropRecordPO propRecordPO =
       PropRecordPO.builder()
@@ -51,11 +55,7 @@ public class PropServiceImpl implements PropService {
         .deltaType(PropRecordPO.DeltaType.ADD.name())
         .build()
         .markAsInitialized();
-
-    this.transactionTemplate.executeWithoutResult(action -> {
-      propUserDAO.insertOrAddQuantity(activityId, userId, propId, quantity);
-      this.propRecordDAO.insert(propRecordPO);
-    });
+    this.propRecordDAO.insert(propRecordPO);
 
     return true;
   }
@@ -74,7 +74,17 @@ public class PropServiceImpl implements PropService {
   @Override
   public boolean useProps(Long activityId, String playwayId, String actionId, Long userId, String propId, Long quantity) {
 
+    if (quantity <= 0) {
+      return false;
+    }
 
+    final int affectedRows =
+      this.propUserDAO.subQuantity(
+        activityId, userId, propId, quantity);
+    // 游戏道具不足，无法减扣
+    if (affectedRows <= 0) {
+      return false;
+    }
 
     final PropRecordPO propRecordPO =
       PropRecordPO.builder()
@@ -87,8 +97,9 @@ public class PropServiceImpl implements PropService {
         .deltaType(PropRecordPO.DeltaType.SUB.name())
         .build()
         .markAsInitialized();
+    this.propRecordDAO.insert(propRecordPO);
 
-    return false;
+    return true;
   }
 
   /**
@@ -101,7 +112,7 @@ public class PropServiceImpl implements PropService {
    */
   @Override
   public Long countPropQuantity(Long activityId, Long userId, String propId) {
-    return null;
+    return this.propUserDAO.countPropQuantity(activityId, userId, propId);
   }
 
   /**
@@ -114,7 +125,9 @@ public class PropServiceImpl implements PropService {
    */
   @Override
   public Map<String, Long> countMultiPropsQuantity(Long activityId, Long userId, List<String> propIds) {
-    return null;
+    return
+      this.propUserDAO.countPropsQuantity(activityId, userId, propIds)
+        .stream().collect(Collectors.toMap(PropIdQuantity::getPropId, PropIdQuantity::getQuantity));
   }
 
   /**
@@ -126,6 +139,8 @@ public class PropServiceImpl implements PropService {
    */
   @Override
   public Map<String, Long> countAllPropsQuantity(Long activityId, Long userId) {
-    return null;
+    return
+      this.propUserDAO.countAllPropsQuantity(activityId, userId)
+        .stream().collect(Collectors.toMap(PropIdQuantity::getPropId, PropIdQuantity::getQuantity));
   }
 }

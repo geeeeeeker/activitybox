@@ -24,7 +24,7 @@ public class ApiImpl implements Api {
   }
 
   @Override
-  public PropApi awardPropApi() {
+  public PropApi propApi() {
     return this.propApi;
   }
 }

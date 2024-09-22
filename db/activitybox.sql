@@ -68,7 +68,7 @@ CREATE TABLE `t_prop_user`
     `gmt_create`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified` datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
-    UNIQUE KEY `uk_propid_userid_activityid` (`prop_id`, `user_id`, `activity_id`)
+    UNIQUE KEY `uk_userid_activityid_propid` (`user_id`, `activity_id`, `prop_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='游戏道具用户表';
 
 

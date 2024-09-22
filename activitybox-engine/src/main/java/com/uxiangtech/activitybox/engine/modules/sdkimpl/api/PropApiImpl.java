@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
  * 游戏道具API实现
  */
 @Component
-public class PropApiImpl extends ApiImpl implements PropApi {
+public class PropApiImpl implements PropApi {
 
   private static final Logger LOGGER =
     LoggerFactory.getLogger(PropApiImpl.class);
@@ -96,6 +96,10 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropId(propId)) {
       return false;
     }
+    if (quantity <= 0) {
+      quantity = 1L;
+    }
+
     return
       this.propService.grantProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), getContext().getUserId(), propId, quantity);
@@ -131,6 +135,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropId(propId)) {
       return false;
     }
+    if (quantity <= 0) {
+      quantity = 1L;
+    }
     return
       this.propService.grantProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), userId, propId, quantity);
@@ -163,6 +170,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
   public boolean useMultiProps(String propId, Long quantity) {
     if (!this.preValidPropId(propId)) {
       return false;
+    }
+    if (quantity <= 0) {
+      quantity = 1L;
     }
     return
       this.propService.useProps(getContext().getActivityId(),
@@ -199,6 +209,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropId(propId)) {
       return false;
     }
+    if (quantity <= 0) {
+      quantity = 1L;
+    }
     return
       this.propService.useProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), userId, propId, quantity);
@@ -215,7 +228,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropId(propId)) {
       return 0L;
     }
-    return null;
+    return
+      this.propService.countPropQuantity(
+        getContext().getActivityId(), getContext().getUserId(), propId);
   }
 
   /**
@@ -229,7 +244,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropIds(propIds)) {
       return new HashMap<>();
     }
-    return null;
+    return
+      this.propService.countMultiPropsQuantity(
+        getContext().getActivityId(), getContext().getUserId(), propIds);
   }
 
   /**
@@ -239,7 +256,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
    */
   @Override
   public Map<String, Long> countAllPropsQuantity() {
-    return null;
+    return
+      this.propService.countAllPropsQuantity(
+        getContext().getActivityId(), getContext().getUserId());
   }
 
   /**
@@ -254,7 +273,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropId(propId)) {
       return 0L;
     }
-    return null;
+    return
+      this.propService.countPropQuantity(
+        getContext().getActivityId(), userId, propId);
   }
 
   /**
@@ -269,7 +290,9 @@ public class PropApiImpl extends ApiImpl implements PropApi {
     if (!this.preValidPropIds(propIds)) {
       return new HashMap<>();
     }
-    return null;
+    return
+      this.propService.countMultiPropsQuantity(
+        getContext().getActivityId(), userId, propIds);
   }
 
   /**
@@ -280,6 +303,8 @@ public class PropApiImpl extends ApiImpl implements PropApi {
    */
   @Override
   public Map<String, Long> countAllPropsQuantity(Long userId) {
-    return null;
+    return
+      this.propService.countAllPropsQuantity(
+        getContext().getActivityId(), userId);
   }
 }
