@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.engine.modules.action;
+package com.uxiangtech.activitybox.engine.modules.sdkimpl.action;
 
 import com.uxiangtech.activitybox.sdk.action.Action;
 import com.uxiangtech.activitybox.sdk.playway.Playway;

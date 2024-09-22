@@ -15,9 +15,6 @@ import java.io.IOException;
 @RestController
 public class AutoLoginStandardController {
 
-  private static final Logger LOGGER =
-    LoggerFactory.getLogger(AutoLoginStandardController.class);
-
   @Resource
   private AutoLoginStandardService autoLoginStandardService;
 

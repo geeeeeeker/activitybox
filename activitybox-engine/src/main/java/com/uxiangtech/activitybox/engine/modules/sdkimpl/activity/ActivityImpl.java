@@ -17,6 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Supplier;
 
+/**
+ * 活动定义实现
+ */
 public class ActivityImpl implements Activity {
 
   private Long id;                      // 活动ID

@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.engine.modules.sdkimpl.playway.invitation;
+package com.uxiangtech.activitybox.engine.modules.playway.invitation;
 
 import com.uxiangtech.activitybox.data.invitation.InvitationCodeDAO;
 import com.uxiangtech.activitybox.data.invitation.InvitationCodePO;

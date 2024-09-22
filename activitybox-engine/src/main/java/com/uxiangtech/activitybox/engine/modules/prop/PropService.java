@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.engine.modules.sdkimpl.prop;
+package com.uxiangtech.activitybox.engine.modules.prop;
 
 import java.util.List;
 import java.util.Map;

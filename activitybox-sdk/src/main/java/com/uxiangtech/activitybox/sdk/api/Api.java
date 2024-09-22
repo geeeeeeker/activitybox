@@ -3,7 +3,7 @@ package com.uxiangtech.activitybox.sdk.api;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContextCapable;
 
 /**
- * 动作调用API，作为最高层API接口，封装所有玩法都可能包含的API
+ * 动作调用API，作为API门面接口，封装所有玩法包含的公共API
  */
 public interface Api extends ActionCallContextCapable {
 
@@ -20,6 +20,8 @@ public interface Api extends ActionCallContextCapable {
    * @return
    */
   PropApi awardPropApi();
+
+
 
 
 

@@ -1,6 +1,7 @@
 package com.uxiangtech.activitybox.engine.modules.sdkimpl.playway.invitation;
 
 import com.uxiangtech.activitybox.common.SpringBeanHolder;
+import com.uxiangtech.activitybox.engine.modules.playway.invitation.InvitationService;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.api.ApiImpl;
 import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlaywayApi;
 import org.springframework.stereotype.Component;

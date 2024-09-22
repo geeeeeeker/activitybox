@@ -5,6 +5,9 @@ import com.uxiangtech.activitybox.sdk.api.Api;
 import com.uxiangtech.activitybox.sdk.api.AwardDrawingApi;
 import com.uxiangtech.activitybox.sdk.api.PropApi;
 
+/**
+ *
+ */
 public class ApiImpl implements Api {
 
   private final AwardDrawingApi awardDrawingApi;

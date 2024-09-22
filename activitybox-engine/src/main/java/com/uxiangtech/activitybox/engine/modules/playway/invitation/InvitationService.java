@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.engine.modules.sdkimpl.playway.invitation;
+package com.uxiangtech.activitybox.engine.modules.playway.invitation;
 
 import java.util.List;
 

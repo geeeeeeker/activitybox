@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.engine.modules.sdkimpl.prop;
+package com.uxiangtech.activitybox.engine.modules.prop;
 
 import com.uxiangtech.activitybox.data.prop.PropRecordDAO;
 import com.uxiangtech.activitybox.data.prop.PropRecordPO;

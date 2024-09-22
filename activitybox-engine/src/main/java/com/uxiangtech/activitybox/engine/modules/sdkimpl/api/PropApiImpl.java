@@ -1,6 +1,6 @@
-package com.uxiangtech.activitybox.engine.modules.sdkimpl.prop;
+package com.uxiangtech.activitybox.engine.modules.sdkimpl.api;
 
-import com.uxiangtech.activitybox.engine.modules.sdkimpl.api.ApiImpl;
+import com.uxiangtech.activitybox.engine.modules.prop.PropService;
 import com.uxiangtech.activitybox.sdk.api.PropApi;
 import com.uxiangtech.activitybox.sdk.attribute.AwardAttribute;
 import com.uxiangtech.activitybox.sdk.award.Award;
