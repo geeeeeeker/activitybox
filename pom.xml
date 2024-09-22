@@ -14,6 +14,8 @@
     <module>activitybox-custom</module>
     <module>activitybox-engine</module>
     <module>activitybox-data</module>
+    <module>activitybox-autologin</module>
+    <module>activitybox-common</module>
   </modules>
 
   <properties>

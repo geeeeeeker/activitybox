@@ -4,6 +4,7 @@ import com.uxiangtech.activitybox.engine.modules.award.Award;
 import com.uxiangtech.activitybox.engine.modules.award.pool.AwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
 import com.uxiangtech.activitybox.engine.modules.playway.Playway;
+import com.uxiangtech.activitybox.engine.modules.variable.Variables;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -40,9 +41,9 @@ public interface Activity {
    */
   ActivityAttribute getAttribute();
 
-  void setVariables(Map<String, Object> variableMap);
+  void setVariables(Variables variables);
 
-  Map<String, Object> getVariableMap();
+  Variables getVariables();
 
   void setPageMap(Map<String, Page> pageMap);
 
@@ -128,11 +129,11 @@ public interface Activity {
    */
   LocalDateTime getGmtModified();
 
-  //  /**
-//   * 获取活动类加载器
-//   * @return
-//   */
-//  ClassLoader getClassLoader();
+  /**
+   * 获取活动类加载器，每个活动一个类加载器，实现不同活动间玩法代码隔离
+   * @return
+   */
+  ClassLoader getClassLoader();
 
   /**
    * 获取事务管理器

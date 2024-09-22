@@ -6,5 +6,5 @@ public interface ContextHolder<C> {
 
   void setContext(final C context);
 
-  void remove();
+  void removeContext();
 }

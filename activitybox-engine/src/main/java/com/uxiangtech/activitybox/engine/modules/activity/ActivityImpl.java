@@ -6,6 +6,8 @@ import com.uxiangtech.activitybox.engine.modules.award.Award;
 import com.uxiangtech.activitybox.engine.modules.award.pool.AwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
 import com.uxiangtech.activitybox.engine.modules.playway.Playway;
+import com.uxiangtech.activitybox.engine.modules.variable.Variables;
+import com.uxiangtech.activitybox.engine.support.classloader.ActivityClassLoader;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -48,7 +50,7 @@ public class ActivityImpl implements Activity {
   private Map<String, Award> awardMap;          // 奖品集合
   private Map<String, AwardPool> awardPoolMap;  // 奖池集合
 
-  private Map<String, Object> variableMap;      // 变量集合
+  private Variables variables;                  // 变量集合
 
   @Override
   public Long getId() {
@@ -71,16 +73,13 @@ public class ActivityImpl implements Activity {
   }
 
   @Override
-  public void setVariables(Map<String, Object> variableMap) {
-    this.variableMap = variableMap;
+  public void setVariables(Variables variables) {
+    this.variables = variables;
   }
 
   @Override
-  public Map<String, Object> getVariableMap() {
-    if (null == this.variableMap) {
-      this.variableMap = new HashMap<>();
-    }
-    return this.variableMap;
+  public Variables getVariables() {
+    return this.variables;
   }
 
   @Override
@@ -179,6 +178,11 @@ public class ActivityImpl implements Activity {
   @Override
   public LocalDateTime getGmtModified() {
     return this.gmtModified;
+  }
+
+  @Override
+  public ClassLoader getClassLoader() {
+    return new ActivityClassLoader();
   }
 
   @Override

@@ -13,7 +13,10 @@
     `gmt_modified`
   </sql>
 
-
+  <select id="findByOutUserIdAndTenantId" resultType="com.uxiangtech.activitybox.data.user.UserPO">
+    SELECT <include refid="fields" />
+        FROM `t_user` WHERE `out_user_id` = #{outUserId} AND `tenant_id` = #{tenantId}
+  </select>
 
 
 </mapper>

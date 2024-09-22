@@ -33,7 +33,7 @@ public class ActionCallContextHolder implements ContextHolder<ActionCallContext>
   }
 
   @Override
-  public void remove() {
+  public void removeContext() {
     CALL_LOCAL.remove();
   }
 }

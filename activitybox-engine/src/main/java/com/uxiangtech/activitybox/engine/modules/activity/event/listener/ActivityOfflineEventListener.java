@@ -1,6 +1,7 @@
-package com.uxiangtech.activitybox.engine.modules.activity.event;
+package com.uxiangtech.activitybox.engine.modules.activity.event.listener;
 
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+import com.uxiangtech.activitybox.engine.modules.activity.event.ActivityOfflineEvent;
 import com.uxiangtech.activitybox.engine.modules.activity.registry.ActivityRegistry;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;

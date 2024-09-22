@@ -1,5 +1,7 @@
 package com.uxiangtech.activitybox.engine.modules.variable;
 
+import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,11 +9,16 @@ public class VariablesImpl implements Variables {
 
   private final Map<String, Object> m = new HashMap<>();
 
-  public VariablesImpl(Map<String, Object> data) {
+  private final Activity activity;
+
+  public VariablesImpl(Map<String, Object> data, Activity activity) {
     this.m.putAll(data);
+    this.activity = activity;
   }
 
-  public VariablesImpl() {
+  @Override
+  public Activity getActivity() {
+    return this.activity;
   }
 
   @Override

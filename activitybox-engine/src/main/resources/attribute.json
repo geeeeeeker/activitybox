@@ -39,6 +39,13 @@
         }
       ]
     }
+  ],
+  "variables": [
+    {
+      "key": "",
+      "value": 1,
+      "type": "INT"
+    }
   ]
 }
 

@@ -2,6 +2,7 @@ package com.uxiangtech.activitybox.engine.modules.variable;
 
 import com.alibaba.fastjson2.JSONArray;
 import com.alibaba.fastjson2.JSONObject;
+import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 
 import java.math.BigDecimal;
 
@@ -13,6 +14,8 @@ public interface Variables {
   enum Type {
     BOOLEAN, INT, DECIMAL, STRING, JSON_OBJECT, JSON_ARRAY
   }
+
+  Activity getActivity();
 
   void putValue(String key, Object value);
 

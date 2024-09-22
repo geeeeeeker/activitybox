@@ -2,11 +2,18 @@ package com.uxiangtech.activitybox.data.user;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.uxiangtech.activitybox.data.BasePO;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 @Data
+@SuperBuilder(toBuilder = true)
+@NoArgsConstructor
+@AllArgsConstructor
 @TableName("t_user")
-public class UserPO {
+public class UserPO extends BasePO<UserPO> {
 
   @TableId
   private Long id;

@@ -10,7 +10,9 @@ import com.uxiangtech.activitybox.engine.modules.page.Page;
 import com.uxiangtech.activitybox.engine.modules.page.PageImpl;
 import com.uxiangtech.activitybox.engine.modules.playway.Playway;
 import com.uxiangtech.activitybox.engine.modules.playway.invitation.InvitationPlaywayImpl;
+import com.uxiangtech.activitybox.engine.modules.variable.VariablesImpl;
 import com.uxiangtech.activitybox.engine.support.SpringBeanHolder;
+import com.uxiangtech.activitybox.engine.support.classloader.ActivityClassLoader;
 import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedStdPlaywayObjectFactory;
 import com.uxiangtech.activitybox.sdk.attribute.PlaywayAttribute;
 import com.uxiangtech.activitybox.sdk.playways.PlaywayType;
@@ -45,6 +47,8 @@ public final class ActivityFactory {
 
   public Activity newActivity(ActivityPO activityPO) {
 
+
+
     // 事务管理器
     final PlatformTransactionManager txManager =
       SpringBeanHolder.getBean(PlatformTransactionManager.class);
@@ -71,10 +75,11 @@ public final class ActivityFactory {
   }
 
   private void buildVariables(Activity activity) {
+    final Map<String, Object> m = new HashMap<>();
     activity.getAttribute().getVariables().forEach(variableAttribute -> {
-      activity.getVariableMap().put(
-        variableAttribute.getKey(), variableAttribute.getValue());
+      m.put(variableAttribute.getKey(), variableAttribute.getValue());
     });
+    activity.setVariables(new VariablesImpl(m, activity));
   }
 
   private void buildPools(Activity activity) {

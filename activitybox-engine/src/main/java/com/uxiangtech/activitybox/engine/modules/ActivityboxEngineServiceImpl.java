@@ -38,11 +38,16 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
     // 活动开始时间和结束时间检查
 
     //构建用户请求上下文
-    final ActionCallContext actionCallContext =
+    final ActionCallContext context =
       new ActionCallContextImpl(activityId, playwayId, actionId, request);
-    ActionCallContextHolder.getInstance().setContext(actionCallContext);
+    final ActionCallContextHolder holder = ActionCallContextHolder.getInstance();
 
-    return action.execute(actionCallContext);
+    holder.setContext(context);
+    try {
+      return action.execute(context);
+    } finally {
+      holder.removeContext();
+    }
 
   }
 

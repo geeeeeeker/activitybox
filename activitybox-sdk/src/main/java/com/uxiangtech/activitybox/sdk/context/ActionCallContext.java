@@ -14,7 +14,12 @@ public interface ActionCallContext extends ActivityContext<ActionCallContext> {
    */
   HttpServletRequest getRequest();
 
-  String getRequestParam(final String param);
+  /**
+   * 获取请求参数值
+   * @param paramName 参数名
+   * @return
+   */
+  String getRequestParam(final String paramName);
 
   /**
    * 获取用户唯一性标识
@@ -23,15 +28,21 @@ public interface ActionCallContext extends ActivityContext<ActionCallContext> {
   Long getUserId();
 
   /**
-   * 外部合作方用户唯一标识
+   * 获取外部合作方用户唯一标识
    * @return
    */
   String getOutUserId();
 
-
-
+  /**
+   * 获取玩法ID
+   * @return
+   */
   String getPlaywayId();
 
+  /**
+   * 获取动作ID
+   * @return
+   */
   String getActionId();
 
 

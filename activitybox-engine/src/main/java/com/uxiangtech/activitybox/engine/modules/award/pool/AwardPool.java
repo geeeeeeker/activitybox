@@ -2,6 +2,8 @@ package com.uxiangtech.activitybox.engine.modules.award.pool;
 
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.award.option.AwardOption;
+import com.uxiangtech.activitybox.engine.modules.award.pool.drawing.AwardDrawingContext;
+import com.uxiangtech.activitybox.engine.modules.award.pool.drawing.AwardDrawingResult;
 
 import java.util.Map;
 
