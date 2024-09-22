@@ -5,6 +5,12 @@ package com.uxiangtech.activitybox.sdk.award;
  */
 public interface AwardDrawingContext {
 
+  Long getActivityId();
+
+  String getPlaywayId();
+
+  String getActionId();
+
   /**
    * 获取抽奖用户ID
    * @return
@@ -22,5 +28,4 @@ public interface AwardDrawingContext {
    * @return
    */
   String getAwardOptionId();
-
 }

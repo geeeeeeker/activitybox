@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.data.invitation;
+package com.uxiangtech.activitybox.data.playways.invitation;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Param;

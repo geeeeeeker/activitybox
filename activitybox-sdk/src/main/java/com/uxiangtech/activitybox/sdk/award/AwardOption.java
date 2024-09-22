@@ -20,6 +20,12 @@ public interface AwardOption {
   String getName();
 
   /**
+   * 获取奖项图片，默认与奖品相同
+   * @return
+   */
+  String getIcon();
+
+  /**
    * 获取奖项概率
    * @return
    */
@@ -29,7 +35,7 @@ public interface AwardOption {
    * 获取奖项库存限制
    * @return
    */
-  Long getStock();
+  Long getTotalStock();
 
   /**
    * 获取奖项归属抽奖规则

@@ -36,13 +36,13 @@ public class PropApiImpl implements PropApi {
    */
   private boolean preValidPropId(final String propId) {
     if (StringUtils.isBlank(propId)) {
-      LOGGER.error("道具预校验失败，道具ID为空", propId);
+      LOGGER.error("道具预校验失败，道具ID为空 >>> 活动ID={}", propId, getContext().getActivityId());
       return false;
     }
     final AwardAttribute awardAttribute =
       this.getAwardAttributeMap().get(propId);
     if (null == awardAttribute) {
-      LOGGER.error("道具预校验失败，道具[{}]不存在", propId);
+      LOGGER.error("道具预校验失败，道具[{}]不存在 >>> 活动ID={}", propId, getContext().getActivityId());
       return false;
     }
     return true;
@@ -50,7 +50,7 @@ public class PropApiImpl implements PropApi {
 
   private boolean preValidPropIds(List<String> propIds) {
     if (CollectionUtils.isEmpty(propIds)) {
-      LOGGER.error("道具预校验失败，道具ID列表为空", propIds);
+      LOGGER.error("道具预校验失败，道具ID列表为空 >>> 活动ID={}", propIds, getContext().getActivityId());
       return false;
     }
     for (String propId : propIds) {

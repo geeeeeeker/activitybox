@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-<mapper namespace="com.uxiangtech.activitybox.data.invitation.InvitationCodeDAO">
+<mapper namespace="com.uxiangtech.activitybox.data.playways.invitation.InvitationCodeDAO">
 
   <sql id="fields">
     `id`,
@@ -14,14 +14,14 @@
   </sql>
 
   <!-- 根据邀请码查询邀请人 -->
-  <select id="findByInvitationCodeAndActivityId" resultType="com.uxiangtech.activitybox.data.invitation.InvitationCodePO">
+  <select id="findByInvitationCodeAndActivityId" resultType="com.uxiangtech.activitybox.data.playways.invitation.InvitationCodePO">
     SELECT <include refid="fields"/>
         FROM `t_invitation_code`
     WHERE `code` = #{code} AND `activity_id` = #{activityId}
   </select>
 
   <!-- 查询我的邀请码 -->
-  <select id="findByUserIdAndActivityId" resultType="com.uxiangtech.activitybox.data.invitation.InvitationCodePO">
+  <select id="findByUserIdAndActivityId" resultType="com.uxiangtech.activitybox.data.playways.invitation.InvitationCodePO">
     SELECT <include refid="fields"/>
         FROM `t_invitation_code`
     WHERE `user_id` = #{userId} AND `activity_id` = #{activityId}

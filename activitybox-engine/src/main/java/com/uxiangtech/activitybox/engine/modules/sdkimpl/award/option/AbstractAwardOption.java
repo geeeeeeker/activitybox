@@ -57,12 +57,17 @@ public abstract class AbstractAwardOption implements AwardOption {
   }
 
   @Override
+  public String getIcon() {
+    return this.award.getIcon();
+  }
+
+  @Override
   public BigDecimal getProbability() {
     return this.probability;
   }
 
   @Override
-  public Long getStock() {
+  public Long getTotalStock() {
     return this.stock;
   }
 

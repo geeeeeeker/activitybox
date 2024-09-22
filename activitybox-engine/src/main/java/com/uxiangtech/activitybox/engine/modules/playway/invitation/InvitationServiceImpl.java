@@ -1,9 +1,9 @@
 package com.uxiangtech.activitybox.engine.modules.playway.invitation;
 
-import com.uxiangtech.activitybox.data.invitation.InvitationCodeDAO;
-import com.uxiangtech.activitybox.data.invitation.InvitationCodePO;
-import com.uxiangtech.activitybox.data.invitation.InvitationRecordDAO;
-import com.uxiangtech.activitybox.data.invitation.InvitationRecordPO;
+import com.uxiangtech.activitybox.data.playways.invitation.InvitationCodeDAO;
+import com.uxiangtech.activitybox.data.playways.invitation.InvitationCodePO;
+import com.uxiangtech.activitybox.data.playways.invitation.InvitationRecordDAO;
+import com.uxiangtech.activitybox.data.playways.invitation.InvitationRecordPO;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.stereotype.Service;
 

@@ -13,7 +13,7 @@ public interface Api extends ActionCallContextCapable {
    * 注意：虽然奖池可以配置抽中游戏道具，但是与直接发放游戏道具奖励有区别，抽奖存在抽中概率和库存等。
    * @return
    */
-  AwardDrawingApi awardDrawingApi();
+  AwardPoolApi awardPoolApi();
 
   /**
    * 游戏道具奖励API

@@ -2,7 +2,7 @@ package com.uxiangtech.activitybox.engine.modules.sdkimpl.api;
 
 import com.uxiangtech.activitybox.common.SpringBeanHolder;
 import com.uxiangtech.activitybox.sdk.api.Api;
-import com.uxiangtech.activitybox.sdk.api.AwardDrawingApi;
+import com.uxiangtech.activitybox.sdk.api.AwardPoolApi;
 import com.uxiangtech.activitybox.sdk.api.PropApi;
 
 /**
@@ -10,17 +10,17 @@ import com.uxiangtech.activitybox.sdk.api.PropApi;
  */
 public class ApiImpl implements Api {
 
-  private final AwardDrawingApi awardDrawingApi;
+  private final AwardPoolApi awardPoolApi;
   private final PropApi propApi;
 
   public ApiImpl() {
-    this.awardDrawingApi = SpringBeanHolder.getBean(AwardDrawingApi.class);
+    this.awardPoolApi = SpringBeanHolder.getBean(AwardPoolApi.class);
     this.propApi = SpringBeanHolder.getBean(PropApi.class);
   }
 
   @Override
-  public AwardDrawingApi awardDrawingApi() {
-    return this.awardDrawingApi;
+  public AwardPoolApi awardPoolApi() {
+    return this.awardPoolApi;
   }
 
   @Override

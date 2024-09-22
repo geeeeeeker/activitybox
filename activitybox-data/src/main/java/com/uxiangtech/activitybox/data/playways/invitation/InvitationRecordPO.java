@@ -1,4 +1,4 @@
-package com.uxiangtech.activitybox.data.invitation;
+package com.uxiangtech.activitybox.data.playways.invitation;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
