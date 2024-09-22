@@ -1,11 +1,12 @@
 package com.uxiangtech.activitybox.engine.support;
 
+import com.uxiangtech.activitybox.common.SpringBeanHolder;
 import com.uxiangtech.activitybox.data.activity.ActivityDAO;
 import com.uxiangtech.activitybox.data.activity.ActivityPO;
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.activity.ActivityFactory;
 import com.uxiangtech.activitybox.engine.modules.activity.event.ActivityOfflineEvent;
 import com.uxiangtech.activitybox.engine.modules.activity.event.ActivityOnlineEvent;
+import com.uxiangtech.activitybox.sdk.activity.Activity;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
 

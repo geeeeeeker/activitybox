@@ -27,6 +27,16 @@ public class PropRecordPO extends BasePO<PropRecordPO> {
   private Long activityId;
 
   /**
+   * 玩法ID
+   */
+  private String playwayId;
+
+  /**
+   * 动作ID
+   */
+  private String actionId;
+
+  /**
    * 用户ID
    */
   private Long userId;
@@ -37,7 +47,17 @@ public class PropRecordPO extends BasePO<PropRecordPO> {
   private String propId;
 
   /**
+   * 道具数量
+   */
+  private Long quantity;
+
+  /**
    * 变更类型
    */
   private String deltaType;
+
+  public enum DeltaType {
+    ADD, SUB
+  }
+
 }

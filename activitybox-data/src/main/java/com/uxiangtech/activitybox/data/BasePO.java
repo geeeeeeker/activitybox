@@ -52,7 +52,7 @@ public abstract class BasePO<T> {
     this.gmtModified = gmtModified;
   }
 
-  public T initialized() {
+  public T markAsInitialized() {
     final LocalDateTime now = LocalDateTime.now();
     this.setDeleted(false);
     this.setGmtCreate(now);

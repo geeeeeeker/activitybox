@@ -1,14 +1,15 @@
 package com.uxiangtech.activitybox.engine.modules;
 
-import com.uxiangtech.activitybox.engine.modules.action.Action;
-import com.uxiangtech.activitybox.engine.modules.activity.ActionCallContextImpl;
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+import com.uxiangtech.activitybox.engine.modules.sdkimpl.context.ActionCallContextImpl;
 import com.uxiangtech.activitybox.engine.modules.activity.registry.ActivityRegistry;
-import com.uxiangtech.activitybox.engine.modules.page.Page;
-import com.uxiangtech.activitybox.engine.support.ActionCallContextHolder;
+import com.uxiangtech.activitybox.sdk.action.Action;
+import com.uxiangtech.activitybox.sdk.activity.Activity;
+import com.uxiangtech.activitybox.sdk.context.ActionCallContextHolder;
+import com.uxiangtech.activitybox.sdk.page.Page;
+import com.uxiangtech.activitybox.sdk.playway.Playway;
 import com.uxiangtech.activitybox.sdk.action.ActionNotFoundException;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
-import com.uxiangtech.activitybox.sdk.playways.PlaywayNotFoundException;
+import com.uxiangtech.activitybox.sdk.playway.PlaywayNotFoundException;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +19,7 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
 
   /**
    * 调用动作
+   *
    * @param activityId 活动ID
    * @param playwayId  玩法ID
    * @param actionId   动作ID
@@ -27,19 +29,20 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
   @Override
   public Object callAction(Long activityId, String playwayId, String actionId, HttpServletRequest request) {
 
+    final Activity activity =
+      ActivityRegistry.getInstance().load(activityId);
+    final Playway<?> playway =
+      activity.getPlaywayOrThrow(playwayId,
+        () -> new PlaywayNotFoundException());
     final Action action =
-      ActivityRegistry.getInstance()
-        .load(activityId)
-        .getPlaywayOrThrow(playwayId,
-          () -> new PlaywayNotFoundException())
-        .getActionOrThrow(actionId,
-          () -> new ActionNotFoundException());
+      playway.getActionOrThrow(actionId,
+        () -> new ActionNotFoundException());
 
     // 活动开始时间和结束时间检查
 
-    //构建用户请求上下文
+    //构建动作调用上下文
     final ActionCallContext context =
-      new ActionCallContextImpl(activityId, playwayId, actionId, request);
+      new ActionCallContextImpl(activity, playway, action, request);
     final ActionCallContextHolder holder = ActionCallContextHolder.getInstance();
 
     holder.setContext(context);
@@ -53,6 +56,7 @@ public class ActivityboxEngineServiceImpl implements ActivityboxEngineService {
 
   /**
    * 获取页面代码
+   *
    * @param activityId 活动ID
    * @param pageId     页面ID
    * @return

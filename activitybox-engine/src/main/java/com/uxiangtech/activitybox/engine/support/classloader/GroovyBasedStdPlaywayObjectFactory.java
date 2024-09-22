@@ -1,6 +1,6 @@
 package com.uxiangtech.activitybox.engine.support.classloader;
 
-import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
+import com.uxiangtech.activitybox.sdk.playway.StdPlayway;
 import groovy.lang.GroovyClassLoader;
 
 import java.util.Map;

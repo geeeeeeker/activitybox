@@ -1,13 +1,22 @@
 package com.uxiangtech.activitybox.engine;
 
-import com.uxiangtech.activitybox.engine.modules.activity.ActionCallContextImpl;
-import com.uxiangtech.activitybox.engine.modules.playway.invitation.InvitationStdPlaywayApiImpl;
+import com.uxiangtech.activitybox.engine.modules.sdkimpl.context.ActionCallContextImpl;
+import com.uxiangtech.activitybox.engine.modules.sdkimpl.playway.invitation.InvitationStdPlaywayApiImpl;
 import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedStdPlaywayObjectFactory;
 import com.uxiangtech.activitybox.engine.support.classloader.StdPlaywayObjectFactory;
+import com.uxiangtech.activitybox.sdk.action.Action;
+import com.uxiangtech.activitybox.sdk.activity.Activity;
+import com.uxiangtech.activitybox.sdk.award.Award;
+import com.uxiangtech.activitybox.sdk.award.AwardPool;
+import com.uxiangtech.activitybox.sdk.page.Page;
+import com.uxiangtech.activitybox.sdk.playway.Playway;
+import com.uxiangtech.activitybox.sdk.variable.Variables;
+import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
-import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
-import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;
+import com.uxiangtech.activitybox.sdk.playway.StdPlayway;
+import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlaywayApi;
 import org.junit.Test;
+import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.servlet.AsyncContext;
 import javax.servlet.DispatcherType;
@@ -29,10 +38,12 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Locale;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class JavacCodeCompilerTest {
 
@@ -472,7 +483,232 @@ public class JavacCodeCompilerTest {
           }
         };
 
-        ActionCallContext ctx = new ActionCallContextImpl(1L, "", "", request);
+        ActionCallContext ctx = new ActionCallContextImpl(new Activity() {
+          @Override
+          public Long getId() {
+            return 1L;
+          }
+
+          @Override
+          public String getName() {
+            return null;
+          }
+
+          @Override
+          public String getRuleDesc() {
+            return null;
+          }
+
+          @Override
+          public ActivityAttribute getAttribute() {
+            return null;
+          }
+
+          @Override
+          public void setVariables(Variables variables) {
+
+          }
+
+          @Override
+          public Variables getVariables() {
+            return null;
+          }
+
+          @Override
+          public void setPageMap(Map<String, Page> pageMap) {
+
+          }
+
+          @Override
+          public Map<String, Page> getPageMap() {
+            return null;
+          }
+
+          @Override
+          public Page getPageOrDegradeToNullPage(String pageId) {
+            return null;
+          }
+
+          @Override
+          public void setPlaywayMap(Map<String, Playway<?>> playwayMap) {
+
+          }
+
+          @Override
+          public Map<String, Playway<?>> getPlaywayMap() {
+            return null;
+          }
+
+          @Override
+          public Playway getPlayway(String playwayId) {
+            return null;
+          }
+
+          @Override
+          public Playway getPlaywayOrThrow(String playwayId, Supplier<RuntimeException> supplier) {
+            return null;
+          }
+
+          @Override
+          public void setAwardMap(Map<String, Award> awardMap) {
+
+          }
+
+          @Override
+          public Map<String, Award> getAwardMap() {
+            return null;
+          }
+
+          @Override
+          public void setAwardPoolMap(Map<String, AwardPool> awardPoolMap) {
+
+          }
+
+          @Override
+          public Map<String, AwardPool> getAwardPoolMap() {
+            return null;
+          }
+
+          @Override
+          public LocalDateTime getStartTime() {
+            return null;
+          }
+
+          @Override
+          public LocalDateTime getEndTime() {
+            return null;
+          }
+
+          @Override
+          public Status getStatus() {
+            return null;
+          }
+
+          @Override
+          public LocalDateTime getGmtCreate() {
+            return null;
+          }
+
+          @Override
+          public LocalDateTime getGmtModified() {
+            return null;
+          }
+
+          @Override
+          public ClassLoader getClassLoader() {
+            return null;
+          }
+
+          @Override
+          public PlatformTransactionManager getTxManager() {
+            return null;
+          }
+        }, new Playway<Playway>() {
+          @Override
+          public String getId() {
+            return null;
+          }
+
+          @Override
+          public String getName() {
+            return null;
+          }
+
+          @Override
+          public Integer version() {
+            return null;
+          }
+
+          @Override
+          public Activity getActivity() {
+            return null;
+          }
+
+          @Override
+          public Object getStdPlaywayInstance() {
+            return null;
+          }
+
+          @Override
+          public Class<? extends StdPlayway> getStdPlaywayClass() {
+            return null;
+          }
+
+          @Override
+          public void setStdPlaywayClass(Class<? extends StdPlayway> stdPlaywayClass) {
+
+          }
+
+          @Override
+          public void setInitConfMethodName(String initConfMethodName) {
+
+          }
+
+          @Override
+          public String getInitConfMethodName() {
+            return null;
+          }
+
+          @Override
+          public Map<String, Action> getActionMap() {
+            return null;
+          }
+
+          @Override
+          public Action getAction(String actionId) {
+            return null;
+          }
+
+          @Override
+          public Action getActionOrThrow(String actionId, Supplier<RuntimeException> supplier) {
+            return null;
+          }
+
+          @Override
+          public ClassLoader getClassLoader() {
+            return null;
+          }
+
+          @Override
+          public String getCode() {
+            return null;
+          }
+
+          @Override
+          public Language getLang() {
+            return null;
+          }
+
+          @Override
+          public Integer getVersion() {
+            return null;
+          }
+        }, new Action() {
+          @Override
+          public String getId() {
+            return null;
+          }
+
+          @Override
+          public String getName() {
+            return null;
+          }
+
+          @Override
+          public Playway getPlayway() {
+            return null;
+          }
+
+          @Override
+          public Method getExecutableMethod() throws NoSuchMethodException {
+            return null;
+          }
+
+          @Override
+          public Object execute(ActionCallContext context) {
+            return null;
+          }
+        }, request);
         InvitationStdPlaywayApi api = new InvitationStdPlaywayApiImpl();
         makeCodeMethod.invoke(playway, ctx, api);
 
@@ -487,8 +723,6 @@ public class JavacCodeCompilerTest {
     }
 
   }
-
-
 
 
 }

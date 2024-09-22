@@ -1,10 +1,10 @@
 package com.uxiangtech.activitybox.engine.modules.action.invitation;
 
 import com.uxiangtech.activitybox.engine.modules.action.AbstractAction;
-import com.uxiangtech.activitybox.engine.modules.playway.Playway;
+import com.uxiangtech.activitybox.sdk.playway.Playway;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
-import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlayway;
-import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;
+import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlayway;
+import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlaywayApi;
 
 import java.lang.reflect.Method;
 

@@ -47,7 +47,7 @@ public class ActivityPO {
   private String status;
 
   /**
-   * 活动配置JSON
+   * 活动配置JSON：包含玩法、页面、奖品、奖池（内部包含奖项）、变量
    */
   private String attribute;
 

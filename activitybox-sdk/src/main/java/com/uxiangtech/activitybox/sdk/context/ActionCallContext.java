@@ -1,6 +1,9 @@
 package com.uxiangtech.activitybox.sdk.context;
 
 
+import com.uxiangtech.activitybox.sdk.action.Action;
+import com.uxiangtech.activitybox.sdk.playway.Playway;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -40,10 +43,22 @@ public interface ActionCallContext extends ActivityContext<ActionCallContext> {
   String getPlaywayId();
 
   /**
+   * 获取玩法定义
+   * @return
+   */
+  Playway getPlayway();
+
+  /**
    * 获取动作ID
    * @return
    */
   String getActionId();
+
+  /**
+   * 获取动作定义
+   * @return
+   */
+  Action getAction();
 
 
 

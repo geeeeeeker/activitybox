@@ -1,11 +1,7 @@
 package com.uxiangtech.activitybox.engine;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import com.uxiangtech.activitybox.data.activity.ActivityDAO;
 import com.uxiangtech.activitybox.data.activity.ActivityPO;
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
-import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.junit.Test;
 
 import javax.annotation.Resource;

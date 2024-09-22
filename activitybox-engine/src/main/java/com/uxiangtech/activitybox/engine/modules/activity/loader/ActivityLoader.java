@@ -1,7 +1,5 @@
 package com.uxiangtech.activitybox.engine.modules.activity.loader;
 
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
-
 import java.util.Map;
 
 public interface ActivityLoader {

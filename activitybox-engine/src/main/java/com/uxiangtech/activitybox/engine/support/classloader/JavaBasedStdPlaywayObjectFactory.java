@@ -7,14 +7,13 @@ import com.github.javaparser.ast.CompilationUnit;
 import com.github.javaparser.ast.NodeList;
 import com.github.javaparser.ast.PackageDeclaration;
 import com.github.javaparser.ast.body.TypeDeclaration;
-import com.uxiangtech.activitybox.engine.modules.playway.ActPlayway;
-import com.uxiangtech.activitybox.engine.modules.playway.StdPlaywayProxy;
+import com.uxiangtech.activitybox.engine.modules.sdkimpl.playway.StdPlaywayProxy;
 import com.uxiangtech.activitybox.engine.support.compiler.ClassMeta;
 import com.uxiangtech.activitybox.engine.support.compiler.CodeCompiler;
 import com.uxiangtech.activitybox.engine.support.compiler.CodeCompilerFactory;
 import com.uxiangtech.activitybox.engine.support.parser.CodeParsedResult;
 import com.uxiangtech.activitybox.engine.support.parser.CodeParser;
-import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
+import com.uxiangtech.activitybox.sdk.playway.StdPlayway;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

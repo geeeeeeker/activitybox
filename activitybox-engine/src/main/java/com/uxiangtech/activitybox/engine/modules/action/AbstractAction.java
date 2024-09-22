@@ -1,6 +1,7 @@
 package com.uxiangtech.activitybox.engine.modules.action;
 
-import com.uxiangtech.activitybox.engine.modules.playway.Playway;
+import com.uxiangtech.activitybox.sdk.action.Action;
+import com.uxiangtech.activitybox.sdk.playway.Playway;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionStatus;

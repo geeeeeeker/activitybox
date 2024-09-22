@@ -40,7 +40,7 @@ public class AutoLoginStandardServiceImpl implements AutoLoginStandardService {
           .outUserId(outUserId)
           .outUsername(outUsername)
           .build()
-          .initialized();
+          .markAsInitialized();
       this.userDAO.insert(userPO);
     }
 
@@ -55,15 +55,14 @@ public class AutoLoginStandardServiceImpl implements AutoLoginStandardService {
     String encryptedCookie = null;
     try {
       encryptedCookie =
-        BlowfishUtils.encryptToBase64(
-          cookieContent.getBytes(StandardCharsets.UTF_8), "");
+        BlowfishUtils.encryptToBase64(cookieContent, BlowfishUtils.SECRET_KEY_ENGINE);
     } catch (Exception e) {
       throw new RuntimeException(e);
     }
 
     final ResponseCookie cookie =
       CookieManager.getInstance()
-        .getResponseCookie(CookieManager.COOKIE_NAME_ACTIVITYBOX_ENGINE, encryptedCookie);
+        .addExtCookie(CookieManager.COOKIE_NAME_ACTIVITYBOX_ENGINE, encryptedCookie);
     return cookie;
   }
 }

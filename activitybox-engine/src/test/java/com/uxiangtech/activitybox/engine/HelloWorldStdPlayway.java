@@ -1,9 +1,9 @@
 package com.uxiangtech.activitybox.engine;
 
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
-import com.uxiangtech.activitybox.sdk.playways.invitation.AbstractInvitationStdPlayway;
-import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;
-import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayConf;
+import com.uxiangtech.activitybox.sdk.playway.invitation.AbstractInvitationStdPlayway;
+import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlaywayApi;
+import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlaywayConf;
 
 public class HelloWorldStdPlayway extends AbstractInvitationStdPlayway {
   @Override

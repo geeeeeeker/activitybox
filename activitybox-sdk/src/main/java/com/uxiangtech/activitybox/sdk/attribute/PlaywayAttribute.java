@@ -1,6 +1,6 @@
 package com.uxiangtech.activitybox.sdk.attribute;
 
-import com.uxiangtech.activitybox.sdk.playways.PlaywayType;
+import com.uxiangtech.activitybox.sdk.playway.PlaywayType;
 import lombok.Data;
 
 @Data

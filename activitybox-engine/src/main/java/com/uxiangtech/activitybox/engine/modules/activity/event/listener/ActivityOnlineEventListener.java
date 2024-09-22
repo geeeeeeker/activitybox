@@ -1,6 +1,5 @@
 package com.uxiangtech.activitybox.engine.modules.activity.event.listener;
 
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.activity.event.ActivityOnlineEvent;
 import com.uxiangtech.activitybox.engine.modules.activity.registry.ActivityRegistry;
 import org.springframework.context.ApplicationListener;

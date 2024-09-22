@@ -4,19 +4,20 @@ package com.uxiangtech.activitybox.common;
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Base64;
 
 public class BlowfishUtils {
 
-  private static final String SECRET_KEY_ENGINE = "";
+  public static final String SECRET_KEY_ENGINE = "#!uxiangtech_actbox_engine";
 
-  private static final String SECRET_KEY_CONSOLE = "";
+  public static final String SECRET_KEY_CONSOLE = "#!uxiangtech_actbox_console";
 
   private static final String ALGORITHM = "Blowfish";
 
-  public static String encryptToBase64(byte[] data, String key) throws Exception {
-    byte[] encryptedData = encrypt(data, key);
+  public static String encryptToBase64(final String plainText, final String key) throws Exception {
+    byte[] encryptedData = encrypt(plainText.getBytes(StandardCharsets.UTF_8), key);
     return Base64.getEncoder().encodeToString(encryptedData);
   }
 
@@ -33,6 +34,11 @@ public class BlowfishUtils {
     Cipher cipher = Cipher.getInstance(ALGORITHM);
     cipher.init(Cipher.ENCRYPT_MODE, secretKey);
     return cipher.doFinal(data);
+  }
+
+  public static String decryptToString(final String base64EncryptedText, String key) throws Exception {
+    byte[] rawBytes = decrypt(Base64.getDecoder().decode(base64EncryptedText), key);
+    return new String(rawBytes);
   }
 
   /**

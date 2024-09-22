@@ -1,5 +1,7 @@
 package com.uxiangtech.activitybox.engine.modules;
 
+import com.uxiangtech.activitybox.engine.support.R;
+import com.uxiangtech.activitybox.engine.support.mvc.NoLogin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,11 +25,14 @@ public class ActivityboxEngineController {
    * @return
    */
   @PostMapping("/activity/{activity-id}/playway/{playway-id}/action/{action-id}.do")
-  public Object callAction(@PathVariable("activity-id") Long activityId,
+  public R callAction(@PathVariable("activity-id") Long activityId,
                            @PathVariable("playway-id") String playwayId,
                            @PathVariable("action-id") String actionId,
                            HttpServletRequest request) {
-    return this.activityboxEngineService.callAction(activityId, playwayId, actionId, request);
+    final Object invokeResult =
+      this.activityboxEngineService
+        .callAction(activityId, playwayId, actionId, request);
+    return R.ok(invokeResult);
   }
 
 
@@ -38,6 +43,7 @@ public class ActivityboxEngineController {
    * @param pageId     页面ID
    * @return
    */
+  @NoLogin
   @GetMapping("/activity/{activity-id}/page/{page-id}.html")
   public String getSkin(@PathVariable("activity-id") Long activityId, @PathVariable("page-id") String pageId) {
     return this.activityboxEngineService.getPage(activityId, pageId);

@@ -1,7 +1,7 @@
 package com.uxiangtech.activitybox.admin.modules.activity;
 
 import com.uxiangtech.activitybox.admin.support.SpringBeanHolder;
-import com.uxiangtech.activitybox.sdk.Activity;
+import com.uxiangtech.activitybox.sdk.activity.Activity;
 
 import java.time.LocalDateTime;
 import java.util.Map;

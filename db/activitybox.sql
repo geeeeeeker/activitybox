@@ -1,6 +1,6 @@
 CREATE TABLE `t_user`
 (
-    `id`           bigint       NOT NULL AUTO_INCREMENT,
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
     `tenant_id`    bigint       NOT NULL COMMENT '租户ID',
     `out_user_id`  varchar(255) NOT NULL COMMENT '外部用户ID',
     `out_username` varchar(255) NULL COMMENT '外部用户名',
@@ -13,7 +13,7 @@ CREATE TABLE `t_user`
 
 CREATE TABLE `t_activity`
 (
-    `id`           bigint       NOT NULL AUTO_INCREMENT,
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
     `name`         varchar(255) NOT NULL COMMENT '活动名称',
     `rule_desc`    varchar(1024) NULL COMMENT '活动规则描述',
     `start_time`   datetime NULL COMMENT '活动开始时间',
@@ -29,9 +29,9 @@ CREATE TABLE `t_activity`
 
 CREATE TABLE `t_invitation_code`
 (
-    `id`           bigint      NOT NULL AUTO_INCREMENT,
-    `activity_id`  bigint      NOT NULL COMMENT '活动ID',
-    `user_id`      bigint      NOT NULL COMMENT '用户ID',
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
+    `activity_id`  bigint unsigned NOT NULL COMMENT '活动ID',
+    `user_id`      bigint unsigned NOT NULL COMMENT '用户ID',
     `code`         varchar(32) NOT NULL COMMENT '邀请码',
     `is_deleted`   tinyint(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
     `gmt_create`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -44,10 +44,10 @@ CREATE TABLE `t_invitation_code`
 
 CREATE TABLE `t_invitation_record`
 (
-    `id`           bigint   NOT NULL AUTO_INCREMENT,
-    `activity_id`  bigint   NOT NULL COMMENT '活动ID',
-    `inviter_id`   bigint   NOT NULL COMMENT '邀请人用户ID',
-    `invitee_id`   bigint   NOT NULL COMMENT '受邀人用户ID',
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
+    `activity_id`  bigint unsigned NOT NULL COMMENT '活动ID',
+    `inviter_id`   bigint unsigned NOT NULL COMMENT '邀请人用户ID',
+    `invitee_id`   bigint unsigned NOT NULL COMMENT '受邀人用户ID',
     `is_deleted`   tinyint(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
     `gmt_create`   datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
@@ -57,34 +57,37 @@ CREATE TABLE `t_invitation_record`
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='邀请记录表';
 
 
-CREATE TABLE `t_my_prop`
+CREATE TABLE `t_prop_user`
 (
-    `id`           bigint      NOT NULL AUTO_INCREMENT,
-    `activity_id`  bigint      NOT NULL COMMENT '活动ID',
-    `user_id`      bigint      NOT NULL COMMENT '用户ID',
-    `prop_id`      varchar(32) NOT NULL COMMENT '道具ID',
-    `quantity`     bigint NULL DEFAULT '0' COMMENT '道具数量',
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
+    `activity_id`  bigint unsigned NOT NULL COMMENT '活动ID',
+    `user_id`      bigint unsigned NOT NULL COMMENT '用户ID',
+    `prop_id`      varchar(32) NOT NULL COMMENT '游戏道具ID',
+    `quantity`     bigint unsigned NULL DEFAULT '0' COMMENT '道具数量',
     `is_deleted`   tinyint(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
     `gmt_create`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified` datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `uk_propid_userid_activityid` (`prop_id`, `user_id`, `activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='我的道具表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='游戏道具用户表';
 
 
 CREATE TABLE `t_prop_record`
 (
-    `id`           bigint      NOT NULL AUTO_INCREMENT,
-    `activity_id`  bigint      NOT NULL COMMENT '活动ID',
+    `id`           bigint unsigned NOT NULL AUTO_INCREMENT,
+    `activity_id`  bigint unsigned NOT NULL COMMENT '活动ID',
+    `playway_id`   varchar(64) NOT NULL COMMENT '玩法ID',
+    `action_id`    varchar(64) NOT NULL COMMENT '动作ID',
     `user_id`      bigint      NOT NULL COMMENT '用户ID',
-    `prop_id`      varchar(32) NOT NULL COMMENT '道具ID',
+    `prop_id`      varchar(32) NOT NULL COMMENT '游戏道具ID',
+    `quantity`     bigint unsigned NULL DEFAULT '0' COMMENT '道具数量',
     `delta_type`   char(3) NULL DEFAULT '0' COMMENT '变更类型: ADD, SUB',
     `is_deleted`   tinyint(1) NOT NULL DEFAULT '0' COMMENT '删除标记',
     `gmt_create`   datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
     `gmt_modified` datetime    NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
     PRIMARY KEY (`id`),
     UNIQUE KEY `uk_propid_userid_activityid` (`prop_id`, `user_id`, `activity_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='我的道具表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='游戏道具记录表';
 
 
 -- CREATE TABLE `t_my_award`

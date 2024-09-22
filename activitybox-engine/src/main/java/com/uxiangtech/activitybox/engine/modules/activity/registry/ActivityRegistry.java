@@ -1,11 +1,10 @@
 package com.uxiangtech.activitybox.engine.modules.activity.registry;
 
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+import com.uxiangtech.activitybox.sdk.activity.Activity;
 import com.uxiangtech.activitybox.sdk.activity.ActivityNotFoundException;
 
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-import java.util.function.Supplier;
 
 /**
  * 活动注册中心

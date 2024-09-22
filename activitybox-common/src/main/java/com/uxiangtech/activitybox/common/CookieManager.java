@@ -2,6 +2,7 @@ package com.uxiangtech.activitybox.common;
 
 import org.springframework.http.ResponseCookie;
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 public final class CookieManager {
 
@@ -35,7 +36,7 @@ public final class CookieManager {
     return cookie;
   }
 
-  public ResponseCookie getResponseCookie(final String name, final String value) {
+  public ResponseCookie addExtCookie(final String name, final String value) {
     return ResponseCookie.from(name, value)
       .httpOnly(true) // 禁止js读取
       .secure(true) // 在https下传输
@@ -46,7 +47,7 @@ public final class CookieManager {
       .build();
   }
 
-  public ResponseCookie getResponseCookie(final String domain, final String name, final String value) {
+  public ResponseCookie addExtCookie(final String domain, final String name, final String value) {
     return
       ResponseCookie.from(name, value)
         .httpOnly(true)
@@ -57,6 +58,28 @@ public final class CookieManager {
         .sameSite("None")
         .build();
   }
+
+
+  public Cookie getCookie(HttpServletRequest request, final String name) {
+    Cookie[] cookies = request.getCookies();
+    for (Cookie cookie : cookies) {
+      if (cookie.getName().equals(name)) {
+        return cookie;
+      }
+    }
+    return null;
+  }
+
+  public String getCookieValue(HttpServletRequest request, final String name) {
+    Cookie cookie = this.getCookie(request, name);
+    if (null == cookie) {
+      return null;
+    } else {
+      return cookie.getValue();
+    }
+  }
+
+
 
 
   public Cookie expireCookie(final Cookie cookie) {

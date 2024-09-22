@@ -1,6 +1,6 @@
 package com.uxiangtech.activitybox.engine.modules.activity.event;
 
-import com.uxiangtech.activitybox.engine.modules.activity.Activity;
+import com.uxiangtech.activitybox.sdk.activity.Activity;
 import org.springframework.context.ApplicationEvent;
 
 public class ActivityOnlineEvent extends ApplicationEvent {
