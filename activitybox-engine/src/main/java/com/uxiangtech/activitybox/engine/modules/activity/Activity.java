@@ -3,7 +3,7 @@ package com.uxiangtech.activitybox.engine.modules.activity;
 import com.uxiangtech.activitybox.engine.modules.award.Award;
 import com.uxiangtech.activitybox.engine.modules.award.pool.AwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
-import com.uxiangtech.activitybox.engine.modules.playways.Playway;
+import com.uxiangtech.activitybox.engine.modules.playway.Playway;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -39,6 +39,10 @@ public interface Activity {
    * @return
    */
   ActivityAttribute getAttribute();
+
+  void setVariables(Map<String, Object> variableMap);
+
+  Map<String, Object> getVariableMap();
 
   void setPageMap(Map<String, Page> pageMap);
 

@@ -36,5 +36,9 @@ public class ActivityAttribute {
    * 玩法列表
    */
   private List<PlaywayAttribute> playways;
+  /**
+   * 变量列表
+   */
+  private List<VariableAttribute> variables;
 
 }

@@ -5,7 +5,7 @@ import com.uxiangtech.activitybox.data.activity.ActivityPO;
 import com.uxiangtech.activitybox.engine.modules.award.Award;
 import com.uxiangtech.activitybox.engine.modules.award.pool.AwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
-import com.uxiangtech.activitybox.engine.modules.playways.Playway;
+import com.uxiangtech.activitybox.engine.modules.playway.Playway;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.springframework.transaction.PlatformTransactionManager;
 
@@ -35,7 +35,6 @@ public class ActivityImpl implements Activity {
     this.startTime = activityPO.getStartTime();
     this.endTime = activityPO.getEndTime();
     this.status = Status.valueOf(activityPO.getStatus());
-    System.out.println(activityPO.getAttribute());
     this.attribute = JSON.parseObject(activityPO.getAttribute(), ActivityAttribute.class);
     this.gmtCreate = activityPO.getGmtCreate();
     this.gmtModified = activityPO.getGmtModified();
@@ -48,6 +47,8 @@ public class ActivityImpl implements Activity {
   private Map<String, Playway<?>> playwayMap;   // 玩法集合
   private Map<String, Award> awardMap;          // 奖品集合
   private Map<String, AwardPool> awardPoolMap;  // 奖池集合
+
+  private Map<String, Object> variableMap;      // 变量集合
 
   @Override
   public Long getId() {
@@ -67,6 +68,19 @@ public class ActivityImpl implements Activity {
   @Override
   public ActivityAttribute getAttribute() {
     return this.attribute;
+  }
+
+  @Override
+  public void setVariables(Map<String, Object> variableMap) {
+    this.variableMap = variableMap;
+  }
+
+  @Override
+  public Map<String, Object> getVariableMap() {
+    if (null == this.variableMap) {
+      this.variableMap = new HashMap<>();
+    }
+    return this.variableMap;
   }
 
   @Override

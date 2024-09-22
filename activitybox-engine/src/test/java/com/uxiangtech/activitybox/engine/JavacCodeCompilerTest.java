@@ -1,9 +1,9 @@
 package com.uxiangtech.activitybox.engine;
 
 import com.uxiangtech.activitybox.engine.modules.activity.ActionCallContextImpl;
-import com.uxiangtech.activitybox.engine.modules.playways.invitation.InvitationStdPlaywayApiImpl;
-import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedPlaywayFactory;
-import com.uxiangtech.activitybox.engine.support.classloader.PlaywayFactory;
+import com.uxiangtech.activitybox.engine.modules.playway.invitation.InvitationStdPlaywayApiImpl;
+import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedStdPlaywayObjectFactory;
+import com.uxiangtech.activitybox.engine.support.classloader.StdPlaywayObjectFactory;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
 import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
 import com.uxiangtech.activitybox.sdk.playways.invitation.InvitationStdPlaywayApi;
@@ -51,9 +51,9 @@ public class JavacCodeCompilerTest {
         "  }\n" +
         "}";
 
-    final PlaywayFactory playwayFactory = new JavaBasedPlaywayFactory(Thread.currentThread().getContextClassLoader());
+    final StdPlaywayObjectFactory stdPlaywayObjectFactory = new JavaBasedStdPlaywayObjectFactory(Thread.currentThread().getContextClassLoader());
 
-    Map<String, StdPlayway> stringObjectMap = playwayFactory.newInstances(code);
+    Map<String, StdPlayway> stringObjectMap = stdPlaywayObjectFactory.newInstances(code);
 
     for (Map.Entry<String, StdPlayway> entry : stringObjectMap.entrySet()) {
       System.out.println(entry.getKey());
@@ -111,9 +111,9 @@ public class JavacCodeCompilerTest {
       "  }\n" +
       "}\n";
 
-    final PlaywayFactory playwayFactory = new JavaBasedPlaywayFactory(Thread.currentThread().getContextClassLoader());
+    final StdPlaywayObjectFactory stdPlaywayObjectFactory = new JavaBasedStdPlaywayObjectFactory(Thread.currentThread().getContextClassLoader());
 
-    Map<String, StdPlayway> stringObjectMap = playwayFactory.newInstances(code);
+    Map<String, StdPlayway> stringObjectMap = stdPlaywayObjectFactory.newInstances(code);
 
     for (Map.Entry<String, StdPlayway> entry : stringObjectMap.entrySet()) {
       System.out.println(entry.getKey());

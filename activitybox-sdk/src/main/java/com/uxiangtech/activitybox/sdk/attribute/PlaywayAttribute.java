@@ -6,9 +6,10 @@ import lombok.Data;
 @Data
 public class PlaywayAttribute {
 
-
   private String id;
   private String name;
+
+
   /**
    * 基础玩法类型：邀请、助力、计分、计数
    */
@@ -25,6 +26,10 @@ public class PlaywayAttribute {
    * 代码类型：支持Java、Groovy、Kotlin、Scala等JVM平台语言
    */
   private String lang;
+  /**
+   * 玩法代码版本
+   */
+  private Integer version;
 
   // TODO 玩法配置，不同的玩法支持不同配置参数
 

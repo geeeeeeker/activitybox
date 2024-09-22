@@ -21,6 +21,7 @@ public abstract class AbstractAwardPool implements AwardPool {
     this.id = attribute.getId();
     this.name = attribute.getName();
     this.activity = activity;
+    this.buildOptions(attribute, activity);
   }
 
   private void buildOptions(final AwardPoolAttribute attribute, final Activity activity) {

@@ -29,7 +29,7 @@
     select
     <include refid="fields"/>
     from `t_activity`
-    where `id` = #{id} AND `status` = 'ONLINE' AND `is_deleted` = false
+    where `status` = 'ONLINE' AND `is_deleted` = false
   </select>
 
 

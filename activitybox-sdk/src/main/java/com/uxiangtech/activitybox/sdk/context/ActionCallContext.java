@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * 用户请求上下文，请求的都是某个活动
  */
-public interface ActionCallContext extends ActivityContext {
+public interface ActionCallContext extends ActivityContext<ActionCallContext> {
 
   /**
    * 获取Servlet请求对象

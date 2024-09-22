@@ -8,10 +8,10 @@ import com.uxiangtech.activitybox.engine.modules.award.pool.DirectAwardPool;
 import com.uxiangtech.activitybox.engine.modules.award.pool.RandomAwardPool;
 import com.uxiangtech.activitybox.engine.modules.page.Page;
 import com.uxiangtech.activitybox.engine.modules.page.PageImpl;
-import com.uxiangtech.activitybox.engine.modules.playways.Playway;
-import com.uxiangtech.activitybox.engine.modules.playways.invitation.InvitationPlaywayImpl;
+import com.uxiangtech.activitybox.engine.modules.playway.Playway;
+import com.uxiangtech.activitybox.engine.modules.playway.invitation.InvitationPlaywayImpl;
 import com.uxiangtech.activitybox.engine.support.SpringBeanHolder;
-import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedPlaywayFactory;
+import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedStdPlaywayObjectFactory;
 import com.uxiangtech.activitybox.sdk.attribute.PlaywayAttribute;
 import com.uxiangtech.activitybox.sdk.playways.PlaywayType;
 import com.uxiangtech.activitybox.sdk.playways.StdPlayway;
@@ -63,8 +63,18 @@ public final class ActivityFactory {
     // 构建奖池，奖池内奖项依赖于奖品
     this.buildPools(activity);
 
+    // 构建变量
+    this.buildVariables(activity);
+
     return activity;
 
+  }
+
+  private void buildVariables(Activity activity) {
+    activity.getAttribute().getVariables().forEach(variableAttribute -> {
+      activity.getVariableMap().put(
+        variableAttribute.getKey(), variableAttribute.getValue());
+    });
   }
 
   private void buildPools(Activity activity) {
@@ -111,8 +121,8 @@ public final class ActivityFactory {
     final List<PlaywayAttribute> playwayAttributes = activity.getAttribute().getPlayways();
 
     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
-    final JavaBasedPlaywayFactory playwayJavaInstanceFactory =
-      new JavaBasedPlaywayFactory(classLoader);
+    final JavaBasedStdPlaywayObjectFactory playwayJavaInstanceFactory =
+      new JavaBasedStdPlaywayObjectFactory(classLoader);
 
     for (PlaywayAttribute playwayAttribute : playwayAttributes) {
 
@@ -128,7 +138,7 @@ public final class ActivityFactory {
           if (stdPlaywayInstance instanceof InvitationStdPlayway) {
             PlaywayType playwayType = PlaywayType.INVITATION;
             // 构建玩法
-            final Playway<?> playway = buildPlayway(activity, stdPlaywayInstance, playwayType);
+            final Playway<?> playway = buildPlayway(playwayAttribute, activity, stdPlaywayInstance, playwayType);
             playwayMap.put(playway.getId(), playway);
           }
         }
@@ -138,20 +148,20 @@ public final class ActivityFactory {
     activity.setPlaywayMap(playwayMap);
   }
 
-  private Playway<?> buildPlayway(Activity activity, StdPlayway stdPlaywayInstance, PlaywayType playwayType) {
+  private Playway<?> buildPlayway(PlaywayAttribute attribute, Activity activity, StdPlayway stdPlaywayInstance, PlaywayType playwayType) {
     ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
 
     final String playwayId = stdPlaywayInstance.getId();
 
-
     final String playwayName = stdPlaywayInstance.getName();
 
     // 不同的Playway，Action逻辑并不相同，因此必须要在具体的Playway中实现action初始化逻辑
+    Playway<?> playway = null;
     switch (playwayType) {
       case INVITATION:
-        return new InvitationPlaywayImpl(playwayId, playwayName, (InvitationStdPlayway) stdPlaywayInstance, activity, classLoader);
+        playway = new InvitationPlaywayImpl(playwayId, playwayName, attribute, (InvitationStdPlayway) stdPlaywayInstance, activity, classLoader);
     }
 
-    return null;
+    return playway;
   }
 }

@@ -1,7 +1,6 @@
 package com.uxiangtech.activitybox.engine.modules.award.pool;
 
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
-import com.uxiangtech.activitybox.engine.modules.award.Award;
 import com.uxiangtech.activitybox.engine.modules.award.option.AwardOption;
 
 import java.util.Map;

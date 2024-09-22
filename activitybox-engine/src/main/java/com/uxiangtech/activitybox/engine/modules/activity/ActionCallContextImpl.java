@@ -1,14 +1,17 @@
 package com.uxiangtech.activitybox.engine.modules.activity;
 
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
-import com.uxiangtech.activitybox.sdk.context.ActivityContext;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 用户请求上下文，请求的都是某个活动
  */
 public class ActionCallContextImpl implements ActionCallContext {
+
+  private Map<String, Object> properties = new HashMap<>();
 
   private String tenantId;
   private final Long activityId;
@@ -69,12 +72,13 @@ public class ActionCallContextImpl implements ActionCallContext {
   }
 
   @Override
-  public ActivityContext addData(String key, Object value) {
-    return null;
+  public ActionCallContext addData(String key, Object value) {
+    this.properties.put(key, value);
+    return this;
   }
 
   @Override
   public Object getData(String key) {
-    return null;
+    return this.properties.get(key);
   }
 }

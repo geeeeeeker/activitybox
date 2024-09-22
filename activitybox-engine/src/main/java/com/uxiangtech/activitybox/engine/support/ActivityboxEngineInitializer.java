@@ -6,9 +6,8 @@ import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.activity.ActivityFactory;
 import com.uxiangtech.activitybox.engine.modules.activity.event.ActivityOfflineEvent;
 import com.uxiangtech.activitybox.engine.modules.activity.event.ActivityOnlineEvent;
-import com.uxiangtech.activitybox.engine.modules.activity.registry.ActivityRegistry;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.ApplicationListener;
+import org.springframework.context.event.ContextRefreshedEvent;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -20,12 +19,19 @@ import java.util.concurrent.TimeUnit;
  * <p>
  * 初始化时，异步读取活动配置数据到内存，解析生成Activity对象
  */
-public class ActivityboxEngineInitializer implements ApplicationRunner {
+public class ActivityboxEngineInitializer implements ApplicationListener<ContextRefreshedEvent> {
 
   private LocalDateTime lastLoadTime = null;
 
+  private volatile boolean isRefreshed = false;
+
   @Override
-  public void run(ApplicationArguments args) throws Exception {
+  public void onApplicationEvent(ContextRefreshedEvent event) {
+
+    if (this.isRefreshed) {
+      return;
+    }
+
 
     Executors.newScheduledThreadPool(1)
       .scheduleAtFixedRate(() -> {
@@ -69,5 +75,6 @@ public class ActivityboxEngineInitializer implements ApplicationRunner {
       }, 10, 30, TimeUnit.SECONDS);
 
 
+    this.isRefreshed = true;
   }
 }

@@ -1,6 +1,6 @@
 package com.uxiangtech.activitybox.engine.modules;
 
-import com.uxiangtech.activitybox.engine.modules.actions.Action;
+import com.uxiangtech.activitybox.engine.modules.action.Action;
 import com.uxiangtech.activitybox.engine.modules.activity.ActionCallContextImpl;
 import com.uxiangtech.activitybox.engine.modules.activity.Activity;
 import com.uxiangtech.activitybox.engine.modules.activity.registry.ActivityRegistry;
