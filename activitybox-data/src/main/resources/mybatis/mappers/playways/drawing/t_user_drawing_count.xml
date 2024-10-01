@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uxiangtech.activitybox.data.playways.drawing.UserDrawingCountDAO">
+
+  <sql id="fields">
+    `id`,
+    `activity_id`,
+    `user_id`,
+    `count`,
+    `is_deleted`,
+    `gmt_create`,
+    `gmt_modified`
+  </sql>
+
+  <select id="findByActivityIdAndUserId" resultType="com.uxiangtech.activitybox.data.playways.drawing.UserDrawingCountPO">
+    SELECT
+    <include refid="fields"/>
+    FROM `t_user_drawing_count` WHERE `user_id` = #{userId} AND `activity_id` = #{activityId} AND `is_deleted` = 0
+  </select>
+
+  <insert id="createOrIncrCount" useGeneratedKeys="true" keyProperty="id"
+          parameterType="com.uxiangtech.activitybox.data.playways.drawing.UserDrawingCountPO">
+    INSERT INTO `t_user_drawing_count` (`activity_id`, `user_id`, `count`, `is_deleted`, `gmt_create`, `gmt_modified`)
+    VALUES (#{activityId}, #{userId}, #{delta}, 0, now(), now())
+    ON DUPLICATE KEY UPDATE `count` = `count` + #{delta}
+  </insert>
+
+  <update id="decrCount">
+    UPDATE `t_user_drawing_count` SET `count` = `count` - #{delta} WHERE `user_id` = #{userId} AND `activity_id` = #{activityId} AND `count` >= #{delta} AND `is_deleted` = 0
+  </update>
+
+</mapper>

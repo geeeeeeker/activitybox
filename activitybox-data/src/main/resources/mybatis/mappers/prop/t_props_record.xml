@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uxiangtech.activitybox.data.props.PropsRecordDAO">
+
+  <sql id="fields">
+    `id`,
+    `activity_id`,
+    `playway_id`,
+    `action_id`,
+    `user_id`,
+    `props_id`,
+    `quantity`,
+    `delta_type`,
+    `is_deleted`,
+    `gmt_create`,
+    `gmt_modified`
+  </sql>
+
+
+
+</mapper>

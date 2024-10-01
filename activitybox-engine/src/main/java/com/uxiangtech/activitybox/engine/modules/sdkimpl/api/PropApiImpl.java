@@ -1,6 +1,6 @@
 package com.uxiangtech.activitybox.engine.modules.sdkimpl.api;
 
-import com.uxiangtech.activitybox.engine.modules.prop.PropService;
+import com.uxiangtech.activitybox.engine.modules.props.PropsService;
 import com.uxiangtech.activitybox.sdk.api.PropApi;
 import com.uxiangtech.activitybox.sdk.attribute.AwardAttribute;
 import com.uxiangtech.activitybox.sdk.award.Award;
@@ -25,10 +25,10 @@ public class PropApiImpl implements PropApi {
   private static final Logger LOGGER =
     LoggerFactory.getLogger(PropApiImpl.class);
 
-  private final PropService propService;
+  private final PropsService propsService;
 
-  public PropApiImpl(final PropService propService) {
-    this.propService = propService;
+  public PropApiImpl(final PropsService propsService) {
+    this.propsService = propsService;
   }
 
   /**
@@ -65,7 +65,7 @@ public class PropApiImpl implements PropApi {
     return
       this.getContext().getActivity().getAttribute().getAwards()
         .stream().filter(attribute ->
-          Award.Type.PROP.name().equals(attribute.getType()))
+          Award.Type.PROPS.name().equals(attribute.getType()))
         .collect(Collectors.toMap(AwardAttribute::getId, Function.identity()));
   }
 
@@ -80,7 +80,7 @@ public class PropApiImpl implements PropApi {
     if (!this.preValidPropId(propId)) {
       return false;
     }
-    return this.propService.grantProps(getContext().getActivityId(),
+    return this.propsService.grantProps(getContext().getActivityId(),
       getContext().getPlaywayId(), getContext().getActionId(), getContext().getUserId(), propId, 1L);
   }
 
@@ -101,7 +101,7 @@ public class PropApiImpl implements PropApi {
     }
 
     return
-      this.propService.grantProps(getContext().getActivityId(),
+      this.propsService.grantProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), getContext().getUserId(), propId, quantity);
   }
 
@@ -118,7 +118,7 @@ public class PropApiImpl implements PropApi {
       return false;
     }
     return
-      this.propService.grantProps(getContext().getActivityId(),
+      this.propsService.grantProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), userId, propId, 1L);
   }
 
@@ -139,7 +139,7 @@ public class PropApiImpl implements PropApi {
       quantity = 1L;
     }
     return
-      this.propService.grantProps(getContext().getActivityId(),
+      this.propsService.grantProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), userId, propId, quantity);
   }
 
@@ -155,7 +155,7 @@ public class PropApiImpl implements PropApi {
       return false;
     }
     return
-      this.propService.useProps(getContext().getActivityId(),
+      this.propsService.useProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), getContext().getUserId(), propId, 1L);
   }
 
@@ -175,7 +175,7 @@ public class PropApiImpl implements PropApi {
       quantity = 1L;
     }
     return
-      this.propService.useProps(getContext().getActivityId(),
+      this.propsService.useProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), getContext().getUserId(), propId, quantity);
   }
 
@@ -192,7 +192,7 @@ public class PropApiImpl implements PropApi {
       return false;
     }
     return
-      this.propService.useProps(getContext().getActivityId(),
+      this.propsService.useProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), userId, propId, 1L);
   }
 
@@ -213,7 +213,7 @@ public class PropApiImpl implements PropApi {
       quantity = 1L;
     }
     return
-      this.propService.useProps(getContext().getActivityId(),
+      this.propsService.useProps(getContext().getActivityId(),
         getContext().getPlaywayId(), getContext().getActionId(), userId, propId, quantity);
   }
 
@@ -229,7 +229,7 @@ public class PropApiImpl implements PropApi {
       return 0L;
     }
     return
-      this.propService.countPropQuantity(
+      this.propsService.countPropQuantity(
         getContext().getActivityId(), getContext().getUserId(), propId);
   }
 
@@ -245,7 +245,7 @@ public class PropApiImpl implements PropApi {
       return new HashMap<>();
     }
     return
-      this.propService.countMultiPropsQuantity(
+      this.propsService.countMultiPropsQuantity(
         getContext().getActivityId(), getContext().getUserId(), propIds);
   }
 
@@ -257,7 +257,7 @@ public class PropApiImpl implements PropApi {
   @Override
   public Map<String, Long> countAllPropsQuantity() {
     return
-      this.propService.countAllPropsQuantity(
+      this.propsService.countAllPropsQuantity(
         getContext().getActivityId(), getContext().getUserId());
   }
 
@@ -274,7 +274,7 @@ public class PropApiImpl implements PropApi {
       return 0L;
     }
     return
-      this.propService.countPropQuantity(
+      this.propsService.countPropQuantity(
         getContext().getActivityId(), userId, propId);
   }
 
@@ -291,7 +291,7 @@ public class PropApiImpl implements PropApi {
       return new HashMap<>();
     }
     return
-      this.propService.countMultiPropsQuantity(
+      this.propsService.countMultiPropsQuantity(
         getContext().getActivityId(), userId, propIds);
   }
 
@@ -304,7 +304,7 @@ public class PropApiImpl implements PropApi {
   @Override
   public Map<String, Long> countAllPropsQuantity(Long userId) {
     return
-      this.propService.countAllPropsQuantity(
+      this.propsService.countAllPropsQuantity(
         getContext().getActivityId(), userId);
   }
 }

@@ -56,4 +56,13 @@ public interface AwardPool {
     DIRECT, RANDOM
   }
 
+  /**
+   *
+   */
+  class Limit {
+
+  }
+
+
+
 }

@@ -28,27 +28,27 @@ public abstract class BasePO<T> {
    */
   protected LocalDateTime gmtModified;
 
-  public Boolean getDeleted() {
-    return isDeleted;
+  protected Boolean getDeleted() {
+    return this.isDeleted;
   }
 
-  public void setDeleted(Boolean deleted) {
-    isDeleted = deleted;
+  protected void setDeleted(Boolean deleted) {
+    this.isDeleted = deleted;
   }
 
-  public LocalDateTime getGmtCreate() {
-    return gmtCreate;
+  protected LocalDateTime getGmtCreate() {
+    return this.gmtCreate;
   }
 
-  public void setGmtCreate(LocalDateTime gmtCreate) {
+  protected void setGmtCreate(LocalDateTime gmtCreate) {
     this.gmtCreate = gmtCreate;
   }
 
-  public LocalDateTime getGmtModified() {
+  protected LocalDateTime getGmtModified() {
     return gmtModified;
   }
 
-  public void setGmtModified(LocalDateTime gmtModified) {
+  protected void setGmtModified(LocalDateTime gmtModified) {
     this.gmtModified = gmtModified;
   }
 

@@ -4,6 +4,7 @@ import com.uxiangtech.activitybox.sdk.award.Award;
 import com.uxiangtech.activitybox.sdk.award.AwardPool;
 import com.uxiangtech.activitybox.sdk.page.Page;
 import com.uxiangtech.activitybox.sdk.playway.Playway;
+import com.uxiangtech.activitybox.sdk.props.Props;
 import com.uxiangtech.activitybox.sdk.variable.Variables;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -44,6 +45,11 @@ public interface Activity {
   void setVariables(Variables variables);
 
   Variables getVariables();
+
+  void setPropsMap(Map<String, Props> propsMap);
+
+  Map<String, Props> getPropsMap();
+
 
   void setPageMap(Map<String, Page> pageMap);
 
@@ -130,7 +136,9 @@ public interface Activity {
   LocalDateTime getGmtModified();
 
   /**
-   * 获取活动类加载器，每个活动一个类加载器，实现不同活动间玩法代码隔离
+   * 获取活动类加载器，每个活动一个类加载器，实现不同活动间玩法代码隔离。
+   *
+   * 设计思路：未来考虑底层玩法代码复用，以JAR包、Git仓库、配置等方式实现玩法代码共享
    * @return
    */
   ClassLoader getClassLoader();
@@ -142,6 +150,14 @@ public interface Activity {
   PlatformTransactionManager getTxManager();
 
   enum Status {
-    DRAFT, ONLINE, OFFLINE
+    DRAFT,   // 草稿，活动尚未发布，尚在配置阶段
+
+    ONLINE,  // 上线，活动已发布，允许用户参与
+
+    OFFLINE, // 下线，活动已结束，不允许用户再访问
+
+    ENDED,   // 结束，活动已结束，允许用户访问查询结果，但不允许继续参与
+
+    ;
   }
 }

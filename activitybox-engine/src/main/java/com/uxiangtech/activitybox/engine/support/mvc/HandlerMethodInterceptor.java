@@ -1,7 +1,7 @@
 package com.uxiangtech.activitybox.engine.support.mvc;
 
 import com.alibaba.fastjson2.JSONObject;
-import com.uxiangtech.activitybox.common.BlowfishUtils;
+import com.uxiangtech.activitybox.common.security.BlowfishUtils;
 import com.uxiangtech.activitybox.common.CookieManager;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.context.UserContextImpl;
 import com.uxiangtech.activitybox.engine.support.R;

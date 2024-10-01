@@ -10,8 +10,8 @@ import java.math.BigDecimal;
  */
 public class ThanksAwardOption extends AbstractAwardOption {
 
-  public ThanksAwardOption(String id, String name, BigDecimal probability, Long stock, AwardPool awardPool) {
-    super(id, name, probability, Long.MAX_VALUE, null, awardPool);
+  public ThanksAwardOption(String id, String name, BigDecimal probability, AwardPool awardPool) {
+    super(id, name, probability, 1L, Long.MAX_VALUE, null, awardPool);
   }
 
   public ThanksAwardOption(AwardOptionAttribute attribute, AwardPool awardPool) {

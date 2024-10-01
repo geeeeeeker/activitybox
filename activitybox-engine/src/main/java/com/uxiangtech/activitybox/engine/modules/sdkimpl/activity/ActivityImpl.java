@@ -8,6 +8,7 @@ import com.uxiangtech.activitybox.sdk.award.Award;
 import com.uxiangtech.activitybox.sdk.award.AwardPool;
 import com.uxiangtech.activitybox.sdk.page.Page;
 import com.uxiangtech.activitybox.sdk.playway.Playway;
+import com.uxiangtech.activitybox.sdk.props.Props;
 import com.uxiangtech.activitybox.sdk.variable.Variables;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import org.springframework.transaction.PlatformTransactionManager;
@@ -53,6 +54,7 @@ public class ActivityImpl implements Activity {
   private Map<String, Playway<?>> playwayMap;   // 玩法集合
   private Map<String, Award> awardMap;          // 奖品集合
   private Map<String, AwardPool> awardPoolMap;  // 奖池集合
+  private Map<String, Props> propsMap;          // 道具集合
 
   private Variables variables;                  // 变量集合
 
@@ -84,6 +86,19 @@ public class ActivityImpl implements Activity {
   @Override
   public Variables getVariables() {
     return this.variables;
+  }
+
+  @Override
+  public void setPropsMap(Map<String, Props> propsMap) {
+    this.propsMap = propsMap;
+  }
+
+  @Override
+  public Map<String, Props> getPropsMap() {
+    if (null == this.propsMap) {
+      this.propsMap = new HashMap<>();
+    }
+    return this.propsMap;
   }
 
   @Override

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uxiangtech.activitybox.data.award.AwardStockDAO">
+
+  <sql id="fields">
+    `id`,
+    `activity_id`,
+    `award_id`,
+    `used_stock`,
+    `total_stock`,
+    `is_deleted`,
+    `gmt_create`,
+    `gmt_modified`
+  </sql>
+
+  <select id="findByActivityIdAndAwardId" resultType="com.uxiangtech.activitybox.data.award.AwardStockPO">
+    SELECT
+    <include refid="fields"/>
+    FROM `t_award_stock` WHERE `award_id` = #{awardId} AND `activity_id` = #{activityId}
+  </select>
+
+  <update id="useStock">
+    UPDATE `t_award_option_stock`
+    SET `used_stock` = `used_stock` + #{quantity}
+    WHERE `award_id` = #{awardId} AND `activity_id` = #{activityId} AND `total_stock` >= `used_stock` + #{quantity}
+  </update>
+
+</mapper>

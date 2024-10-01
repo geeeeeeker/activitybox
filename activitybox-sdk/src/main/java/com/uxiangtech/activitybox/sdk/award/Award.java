@@ -1,9 +1,10 @@
 package com.uxiangtech.activitybox.sdk.award;
 
 import com.uxiangtech.activitybox.sdk.activity.Activity;
+import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
 
 /**
- * 奖品
+ * 奖品，配置的奖项最终还是映射到奖品，由奖品实际减扣库存。奖品用于抽奖。
  */
 public interface Award {
 
@@ -20,16 +21,22 @@ public interface Award {
   String getName();
 
   /**
+   * 获取奖品类型，如商品类型，道具类型等
+   * @return
+   */
+  String getType();
+
+  /**
    * 获取奖项图标URL
    * @return
    */
   String getIcon();
 
   /**
-   * 获取奖项对应商品URL
+   * 获取奖品关联ID，如商品ID，道具ID
    * @return
    */
-  String getLink();
+  String getRefId();
 
   /**
    * 获取奖品归属活动
@@ -38,15 +45,23 @@ public interface Award {
   Activity getActivity();
 
   /**
-   * 获取奖品库存，奖品库存是该活动的所有
+   * 获取奖品库存，奖品库存是该活动所有的奖项库存
    * @return
    */
   Long getStock();
 
+  /**
+   * 发放奖品
+   */
+  Object execute(AwardDrawingContext context);
+
   enum Type {
-    PROP,  // 游戏道具
 
+    DRAWING, // 抽奖
 
+    PROPS,  // 道具
+
+    GOODS,  // 商品
   }
 
 }

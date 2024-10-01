@@ -32,19 +32,4 @@ public class UserPO extends BasePO<UserPO> {
    * 外部用户名
    */
   private String outUsername;
-
-  /**
-   * 删除标记
-   */
-  private Boolean isDeleted;
-
-  /**
-   * 创建时间
-   */
-  private String gmtCreate;
-
-  /**
-   * 修改时间
-   */
-  private String gmtModified;
 }

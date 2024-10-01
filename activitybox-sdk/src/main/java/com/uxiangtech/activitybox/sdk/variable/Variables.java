@@ -7,7 +7,7 @@ import com.uxiangtech.activitybox.sdk.activity.Activity;
 import java.math.BigDecimal;
 
 /**
- * 变量容器
+ * 变量容器，用于存储配置项，类似于Apollo或Nacos等功能配置中心功能
  */
 public interface Variables {
 

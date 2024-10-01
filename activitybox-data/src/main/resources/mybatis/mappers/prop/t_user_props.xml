@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.uxiangtech.activitybox.data.props.UserPropsDAO">
+
+  <sql id="fields">
+    `id`,
+    `activity_id`,
+    `user_id`,
+    `props_id`,
+    `quantity`,
+    `is_deleted`,
+    `gmt_create`,
+    `gmt_modified`
+  </sql>
+
+  <insert id="insertOrAddQuantity">
+    INSERT INTO `t_user_prop` (`activity_id`, `user_id`, `props_id`, `quantity`)
+    VALUES (#{activityId}, #{userId}, #{propsId}, #{quantity})
+    ON DUPLICATE KEY UPDATE `quantity` = `quantity` + #{quantity}
+  </insert>
+
+  <update id="subQuantity">
+    UPDATE `t_user_prop`
+    SET `quantity` = `quantity` - #{quantity}
+    WHERE `user_id` = #{userId} AND `activity_id` = #{activityId} AND `props_id` = #{propsId} AND `quantity` >= #{quantity}
+  </update>
+
+  <select id="countPropQuantity" resultType="java.lang.Long">
+    SELECT `quantity`
+    FROM `t_user_prop`
+    WHERE `user_id` = #{userId} AND `activity_id` = #{activityId} AND `props_id` = #{propsId} AND `is_deleted` = 0
+  </select>
+
+  <select id="countPropsQuantity" resultType="com.uxiangtech.activitybox.data.props.PropsIdQuantity">
+    SELECT `props_id`, SUM(`quantity`)
+    FROM `t_user_prop`
+    WHERE `user_id` = #{userId} AND `activity_id` = #{activityId} AND `props_id` IN
+    <foreach collection="propsIds" item="propsId" open="(" separator="," close=")">
+      #{propsId}
+    </foreach> AND `is_deleted` = 0
+  </select>
+
+  <select id="countAllPropsQuantity" resultType="com.uxiangtech.activitybox.data.props.PropsIdQuantity">
+    SELECT `props_id`, SUM(`quantity`)
+    FROM `t_user_prop`
+    WHERE `user_id` = #{userId} AND `activity_id` = #{activityId} AND `is_deleted` = 0
+  </select>
+
+
+
+
+</mapper>

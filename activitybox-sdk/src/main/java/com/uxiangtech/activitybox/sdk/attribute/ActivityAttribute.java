@@ -23,6 +23,11 @@ public class ActivityAttribute {
   private List<PageAttribute> pages;
 
   /**
+   * 道具列表
+   */
+  private List<PropsAttribute> props;
+
+  /**
    * 奖品列表
    */
   private List<AwardAttribute> awards;

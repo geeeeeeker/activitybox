@@ -28,4 +28,7 @@ public class AwardOptionAttribute {
   private Long stock;
 
   // TODO 未来增加各种抽象限制
+
+  @JSONField(name = "grant_qty")
+  private Long grantQuantity;
 }

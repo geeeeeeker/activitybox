@@ -26,9 +26,9 @@ public class ActivityboxEngineController {
    */
   @PostMapping("/activity/{activity-id}/playway/{playway-id}/action/{action-id}.do")
   public R callAction(@PathVariable("activity-id") Long activityId,
-                           @PathVariable("playway-id") String playwayId,
-                           @PathVariable("action-id") String actionId,
-                           HttpServletRequest request) {
+                      @PathVariable("playway-id") String playwayId,
+                      @PathVariable("action-id") String actionId,
+                      HttpServletRequest request) {
     final Object invokeResult =
       this.activityboxEngineService
         .callAction(activityId, playwayId, actionId, request);

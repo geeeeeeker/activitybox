@@ -77,6 +77,7 @@ public abstract class AbstractAction implements Action {
       txDef.setTimeout(transactionalAnno.timeout());
       txDef.setReadOnly(transactionalAnno.readOnly());
 
+
       // 不需要回滚的异常
       noRollbackForClasses = transactionalAnno.noRollbackFor();
       // 需要回滚的异常
@@ -129,7 +130,7 @@ public abstract class AbstractAction implements Action {
         }
 
         if (null != isRollback && isRollback) {
-          txManager.rollback(transactionStatus);
+          transactionStatus.setRollbackOnly();
         }
       }
 

@@ -11,8 +11,8 @@ import java.math.BigDecimal;
  */
 public class AwardOptionImpl extends AbstractAwardOption {
 
-  public AwardOptionImpl(String id, String name, BigDecimal probability, Long stock, Award award, AwardPool awardPool) {
-    super(id, name, probability, stock, award, awardPool);
+  public AwardOptionImpl(String id, String name, BigDecimal probability, Long grantQuantity, Long stock, Award award, AwardPool awardPool) {
+    super(id, name, probability, grantQuantity, stock, award, awardPool);
   }
 
   public AwardOptionImpl(AwardOptionAttribute attribute, Award award, AwardPool awardPool) {

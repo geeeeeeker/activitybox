@@ -2,12 +2,14 @@ package com.uxiangtech.activitybox.engine.modules.activity;
 
 import com.uxiangtech.activitybox.common.SpringBeanHolder;
 import com.uxiangtech.activitybox.data.activity.ActivityPO;
+import com.uxiangtech.activitybox.engine.modules.award.GoodsAward;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.activity.ActivityImpl;
-import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.PropAward;
-import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.pool.DirectAwardPool;
-import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.pool.RandomAwardPool;
+import com.uxiangtech.activitybox.engine.modules.award.PropsAward;
+import com.uxiangtech.activitybox.engine.modules.award.pool.DirectAwardPool;
+import com.uxiangtech.activitybox.engine.modules.award.pool.RandomAwardPool;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.page.PageImpl;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.playway.invitation.InvitationPlaywayImpl;
+import com.uxiangtech.activitybox.engine.modules.sdkimpl.props.PropsImpl;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.variable.VariablesImpl;
 import com.uxiangtech.activitybox.engine.support.classloader.JavaBasedStdPlaywayObjectFactory;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
@@ -19,6 +21,7 @@ import com.uxiangtech.activitybox.sdk.attribute.PlaywayAttribute;
 import com.uxiangtech.activitybox.sdk.playway.PlaywayType;
 import com.uxiangtech.activitybox.sdk.playway.StdPlayway;
 import com.uxiangtech.activitybox.sdk.playway.invitation.InvitationStdPlayway;
+import com.uxiangtech.activitybox.sdk.props.Props;
 import org.springframework.transaction.PlatformTransactionManager;
 
 import java.util.HashMap;
@@ -47,7 +50,6 @@ public final class ActivityFactory {
   }
 
   public Activity newActivity(ActivityPO activityPO) {
-
 
 
     // 事务管理器
@@ -94,22 +96,28 @@ public final class ActivityFactory {
           break;
         case DIRECT:
           awardPool = new DirectAwardPool(poolAttribute, activity);
+          break;
       }
       activity.getAwardPoolMap().put(awardPool.getId(), awardPool);
     });
   }
 
   private void buildAwards(Activity activity) {
-    activity.getAttribute().getAwards().forEach(awardAttribute -> {
-      Award award = null;
-        Award.Type awardType =
-        Award.Type.valueOf(awardAttribute.getType());
-      switch (awardType) {
-        case PROP:
-          award = new PropAward(awardAttribute, activity);
-      }
-      activity.getAwardMap().put(awardAttribute.getId(), award);
-    });
+    activity.getAttribute().getAwards()
+      .forEach(awardAttribute -> {
+        final Award.Type awardType =
+          Award.Type.valueOf(awardAttribute.getType());
+        Award award = null;
+        switch (awardType) {
+          case PROPS:
+            award = new PropsAward(awardAttribute, activity);
+            break;
+          case GOODS:
+            award = new GoodsAward(awardAttribute, activity);
+            break;
+        }
+        activity.getAwardMap().put(awardAttribute.getId(), award);
+      });
   }
 
   private void buildPages(Activity activity) {
@@ -118,6 +126,15 @@ public final class ActivityFactory {
         final String pageId = pageAttribute.getId();
         final Page page = new PageImpl(pageAttribute, activity);
         activity.getPageMap().put(pageId, page);
+      });
+  }
+
+  private void buildProps(Activity activity) {
+    activity.getAttribute().getProps()
+      .forEach(propsAttribute -> {
+        final String propsId = propsAttribute.getId();
+        final Props props = new PropsImpl(propsAttribute, activity);
+        activity.getPropsMap().put(propsId, props);
       });
   }
 

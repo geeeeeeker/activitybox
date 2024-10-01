@@ -1,7 +1,7 @@
 package com.uxiangtech.activitybox.engine.support.conf;
 
 import com.uxiangtech.activitybox.common.SpringBeanHolder;
-import com.uxiangtech.activitybox.engine.support.ActivityboxEngineInitializer;
+import com.uxiangtech.activitybox.engine.support.ActivityboxEngineInitializingListener;
 import com.uxiangtech.activitybox.engine.support.mvc.MvcConfigurerAdapter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +16,8 @@ public class EngineConf {
   }
 
   @Bean
-  public ActivityboxEngineInitializer engineInitializer() {
-    return new ActivityboxEngineInitializer();
+  public ActivityboxEngineInitializingListener engineInitializer() {
+    return new ActivityboxEngineInitializingListener();
   }
 
   @Bean

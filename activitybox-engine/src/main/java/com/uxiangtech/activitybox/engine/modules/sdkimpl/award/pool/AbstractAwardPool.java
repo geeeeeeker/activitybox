@@ -3,6 +3,8 @@ package com.uxiangtech.activitybox.engine.modules.sdkimpl.award.pool;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.option.AwardOptionImpl;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
 import com.uxiangtech.activitybox.sdk.award.Award;
+import com.uxiangtech.activitybox.sdk.award.AwardDrawingContext;
+import com.uxiangtech.activitybox.sdk.award.AwardDrawingResult;
 import com.uxiangtech.activitybox.sdk.award.AwardOption;
 import com.uxiangtech.activitybox.sdk.award.AwardPool;
 import com.uxiangtech.activitybox.sdk.attribute.AwardOptionAttribute;
@@ -68,4 +70,23 @@ public abstract class AbstractAwardPool implements AwardPool {
   public List<AwardOption> getAwardOptions() {
     return this.awardOptions;
   }
+
+  @Override
+  public AwardDrawingResult draw(AwardDrawingContext context) {
+
+    // 抽奖次数检查
+
+    final AwardOption hitAwardOption = this.chooseAwardOption(context);
+
+    final Award award = hitAwardOption.getAward();
+
+    award.execute(context);
+
+    final AwardDrawingResult awardDrawingResult =
+      new AwardDrawingResultImpl(hitAwardOption);
+
+    return awardDrawingResult;
+  }
+
+  protected abstract AwardOption chooseAwardOption(AwardDrawingContext context);
 }
