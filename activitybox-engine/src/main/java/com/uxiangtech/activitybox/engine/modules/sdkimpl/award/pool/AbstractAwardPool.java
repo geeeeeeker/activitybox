@@ -9,6 +9,7 @@ import com.uxiangtech.activitybox.sdk.award.AwardOption;
 import com.uxiangtech.activitybox.sdk.award.AwardPool;
 import com.uxiangtech.activitybox.sdk.attribute.AwardOptionAttribute;
 import com.uxiangtech.activitybox.sdk.attribute.AwardPoolAttribute;
+import com.uxiangtech.activitybox.sdk.award.AwardExecutedResult;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -78,12 +79,16 @@ public abstract class AbstractAwardPool implements AwardPool {
 
     final AwardOption hitAwardOption = this.chooseAwardOption(context);
 
+    // 抽奖上下文补充命中奖项
+    context.setAwardOption(hitAwardOption);
+
+    // 奖项对应的奖品，根据具体的奖品执行对应奖品的发放策略
     final Award award = hitAwardOption.getAward();
 
-    award.execute(context);
+    final AwardExecutedResult awardExecutedResult = award.execute(context);
 
     final AwardDrawingResult awardDrawingResult =
-      new AwardDrawingResultImpl(hitAwardOption);
+      new AwardDrawingResultImpl(hitAwardOption, awardExecutedResult);
 
     return awardDrawingResult;
   }

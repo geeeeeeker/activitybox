@@ -6,7 +6,7 @@ import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.AbstractAward;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
 import com.uxiangtech.activitybox.sdk.attribute.AwardAttribute;
 import com.uxiangtech.activitybox.sdk.award.AwardDrawingContext;
-import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
+import com.uxiangtech.activitybox.sdk.award.AwardExecutedResult;
 
 /**
  * 抽奖机会奖品
@@ -36,7 +36,14 @@ public class DrawingAward extends AbstractAward {
   }
 
   @Override
-  public Object execute(AwardDrawingContext context) {
-    return null;
+  public AwardExecutedResult execute(AwardDrawingContext context) {
+
+    // 增加抽奖次数
+
+    this.drawingService.incrDrawableCount(
+      context.getActivityId(), context.getUserId(), context.getAwardOption().getGrantQuantity());
+
+
+    return new AwardExecutedResult(null, true);
   }
 }

@@ -5,13 +5,17 @@ import com.uxiangtech.activitybox.sdk.award.Award;
 import com.uxiangtech.activitybox.sdk.award.AwardDrawingResult;
 import com.uxiangtech.activitybox.sdk.award.AwardOption;
 import com.uxiangtech.activitybox.sdk.award.AwardPool;
+import com.uxiangtech.activitybox.sdk.award.AwardExecutedResult;
 
 public class AwardDrawingResultImpl implements AwardDrawingResult {
 
   private final AwardOption awardOption;
 
-  public AwardDrawingResultImpl(final AwardOption awardOption) {
+  private final AwardExecutedResult awardExecutedResult;
+
+  public AwardDrawingResultImpl(final AwardOption awardOption, final AwardExecutedResult awardExecutedResult) {
     this.awardOption = awardOption;
+    this.awardExecutedResult = awardExecutedResult;
   }
 
   @Override
@@ -62,6 +66,6 @@ public class AwardDrawingResultImpl implements AwardDrawingResult {
    */
   @Override
   public String getLink() {
-    return null;
+    return awardExecutedResult.getLink();
   }
 }

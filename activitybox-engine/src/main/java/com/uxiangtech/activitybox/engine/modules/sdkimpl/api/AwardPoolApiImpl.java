@@ -47,8 +47,8 @@ public class AwardPoolApiImpl implements AwardPoolApi {
     }
 
     // 构建抽奖上下文
-    final AwardDrawingContext context = new AwardDrawingContextImpl(getContext().getActivityId(),
-      getContext().getPlaywayId(), getContext().getActionId(), userId, awardPoolId);
+    final AwardDrawingContext context = new AwardDrawingContextImpl(
+      getContext().getActivityId(), getContext().getPlaywayId(), getContext().getActionId(), userId, awardPoolId);
 
     return awardPool.draw(context);
   }

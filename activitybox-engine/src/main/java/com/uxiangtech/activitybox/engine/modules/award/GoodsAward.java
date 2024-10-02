@@ -4,7 +4,7 @@ import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.AbstractAward;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
 import com.uxiangtech.activitybox.sdk.attribute.AwardAttribute;
 import com.uxiangtech.activitybox.sdk.award.AwardDrawingContext;
-import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
+import com.uxiangtech.activitybox.sdk.award.AwardExecutedResult;
 
 /**
  * 商品奖品，涉及到远程调用商品中心进行发奖
@@ -23,7 +23,7 @@ public class GoodsAward extends AbstractAward {
   }
 
   @Override
-  public Object execute(AwardDrawingContext context) {
+  public AwardExecutedResult execute(AwardDrawingContext context) {
 
     // TODO 调用商品中心或权益中心接口，如果对接了其他平台则调用该平台接口权益发放接口
 

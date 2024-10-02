@@ -6,7 +6,7 @@ import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.AbstractAward;
 import com.uxiangtech.activitybox.sdk.activity.Activity;
 import com.uxiangtech.activitybox.sdk.attribute.AwardAttribute;
 import com.uxiangtech.activitybox.sdk.award.AwardDrawingContext;
-import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
+import com.uxiangtech.activitybox.sdk.award.AwardExecutedResult;
 
 /**
  * 道具奖品
@@ -42,13 +42,13 @@ public class PropsAward extends AbstractAward {
   }
 
   @Override
-  public Object execute(AwardDrawingContext context) {
+  public AwardExecutedResult execute(AwardDrawingContext context) {
 
     final String propsId = this.getRefId();
 
     this.propsService.grantProps(context.getActivityId(),
       context.getPlaywayId(), context.getActionId(), context.getUserId(), propsId, 1L);
 
-    return null;
+    return new AwardExecutedResult(null, true);
   }
 }

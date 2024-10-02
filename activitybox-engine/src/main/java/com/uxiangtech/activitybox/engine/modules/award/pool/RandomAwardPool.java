@@ -1,12 +1,9 @@
 package com.uxiangtech.activitybox.engine.modules.award.pool;
 
-import com.uxiangtech.activitybox.common.SpringBeanHolder;
-import com.uxiangtech.activitybox.engine.modules.award.service.AwardService;
 import com.uxiangtech.activitybox.engine.modules.award.limiter.AwardDrawingLimitedException;
 import com.uxiangtech.activitybox.engine.modules.award.limiter.AwardDrawingLimiter;
 import com.uxiangtech.activitybox.engine.modules.award.limiter.AwardDrawingLimiterContext;
 import com.uxiangtech.activitybox.engine.modules.award.limiter.AwardDrawingLimiterPipeline;
-import com.uxiangtech.activitybox.engine.modules.props.PropsService;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.option.DegradedThanksAwardOption;
 import com.uxiangtech.activitybox.engine.modules.sdkimpl.award.pool.AbstractAwardPool;
 import com.uxiangtech.activitybox.sdk.activity.Activity;

@@ -11,6 +11,7 @@ import com.uxiangtech.activitybox.sdk.award.Award;
 import com.uxiangtech.activitybox.sdk.award.AwardPool;
 import com.uxiangtech.activitybox.sdk.page.Page;
 import com.uxiangtech.activitybox.sdk.playway.Playway;
+import com.uxiangtech.activitybox.sdk.props.Props;
 import com.uxiangtech.activitybox.sdk.variable.Variables;
 import com.uxiangtech.activitybox.sdk.attribute.ActivityAttribute;
 import com.uxiangtech.activitybox.sdk.context.ActionCallContext;
@@ -512,6 +513,16 @@ public class JavacCodeCompilerTest {
 
           @Override
           public Variables getVariables() {
+            return null;
+          }
+
+          @Override
+          public void setPropsMap(Map<String, Props> propsMap) {
+
+          }
+
+          @Override
+          public Map<String, Props> getPropsMap() {
             return null;
           }
 

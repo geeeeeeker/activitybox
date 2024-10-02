@@ -35,9 +35,7 @@ public interface AwardDrawingContext {
    */
   String getAwardPoolId();
 
-  /**
-   * 获取奖项ID
-   * @return
-   */
-  String getAwardOptionId();
+  void setAwardOption(AwardOption awardOption);
+
+  AwardOption getAwardOption();
 }
